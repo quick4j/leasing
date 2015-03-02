@@ -1,0 +1,8 @@
+.datagrid-operation-button{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    padding: 0 5px;
+    vertical-align:middle;
+    cursor: pointer;
+}

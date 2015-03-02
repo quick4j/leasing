@@ -1,0 +1,19 @@
+{
+    "name": "leasers",
+    "entity": "com.github.quick4j.leasing.lease.relet.entity.Leaser",
+    "columns": [
+        [
+            {
+                "field":"code",
+                "title":"助记码",
+                "width": 100,
+                "editor": "text"
+            },
+            {
+                "field":"name",
+                "title":"名称",
+                "width": 200
+            }
+        ]
+    ]
+}

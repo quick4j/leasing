@@ -1,0 +1,19 @@
+{
+    "name": "holders",
+    "entity": "com.github.quick4j.leasing.lease.leaseholder.entity.LeaseHoder",
+    "columns": [
+        [
+            {
+                "field":"code",
+                "title":"助记码",
+                "width": 100,
+                "editor": "text"
+            },
+            {
+                "field":"name",
+                "title":"承建单位",
+                "width": 200
+            }
+        ]
+    ]
+}

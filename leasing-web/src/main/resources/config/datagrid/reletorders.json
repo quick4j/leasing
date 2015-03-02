@@ -1,0 +1,32 @@
+{
+    "name": "reletorders",
+    "entity": "com.github.quick4j.leasing.lease.relet.entity.ReletOrder",
+    "columns": [
+        [
+            {
+                "field":"code",
+                "title":"编号",
+                "width": 200,
+                "editor": "text"
+            },
+            {
+                "field":"holderName",
+                "title":"承租单位",
+                "width": 200,
+                "formatter": "formateHolder"
+            },
+            {
+                "field":"openTime",
+                "title":"开票日期",
+                "width": 100,
+                "formatter": "formateOpenTime",
+                "sortable": true
+            },
+            {
+                "field":"transactorName",
+                "title":"经办人",
+                "width": 100
+            }
+        ]
+    ]
+}

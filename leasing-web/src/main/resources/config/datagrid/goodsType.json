@@ -1,0 +1,19 @@
+{
+    "name": "goodsType",
+    "entity": "com.github.quick4j.leasing.basic.goods.entity.GoodsType",
+    "columns": [
+        [
+            {
+                "field":"code",
+                "title":"助记码",
+                "width": 100,
+                "editor": "text"
+            },
+            {
+                "field":"name",
+                "title":"类别",
+                "width": 150
+            }
+        ]
+    ]
+}

@@ -1,0 +1,78 @@
+[{
+    "text": "基础信息",
+    "children":[{
+        "text":"料具维护",
+        "attributes":{
+            "url":"basic/goods"
+        }
+    }]
+},{
+    "text": "租赁管理",
+    "children":[{
+        "text":"承租单位维护",
+        "attributes":{
+            "url":"lease/holder"
+        }
+    },{
+        "text":"租赁发料单",
+        "attributes":{
+            "url":"lease/orders/faliao/new"
+        }
+    },{
+        "text":"租赁收料单",
+        "attributes":{
+            "url":"lease/orders/shouliao/new"
+        }
+    }]
+},{
+    "text":"租借管理",
+    "children":[{
+        "text":"租借单位维护",
+        "attributes":{
+            "url":"lease/relet/leaser"
+        }
+    },{
+        "text":"租借发料单",
+        "attributes":{
+            "url":"lease/relet/faliao/new"
+        }
+    },{
+        "text":"租借收料单",
+        "attributes":{
+            "url":"lease/relet/shouliao/new"
+        }
+    }]
+},{
+    "text": "统计查询",
+    "children":[{
+        "text":"租赁发料单查询",
+        "attributes":{
+            "url":"lease/orders/faliao"
+        }
+    },{
+        "text":"租赁收料单查询",
+        "attributes":{
+            "url":"lease/orders/shouliao"
+        }
+    },{
+        "text":"租借发料单查询",
+        "attributes":{
+            "url":"lease/relet/faliao"
+        }
+    },{
+        "text":"租借收料单查询",
+        "attributes":{
+            "url":"lease/relet/shouliao"
+        }
+    },{
+        "text":"租赁汇总",
+        "attributes":{
+            "url":"lease/summary/leasing"
+        }
+    },{
+        "text":"租借汇总",
+        "attributes":{
+            "url":"lease/summary/relet"
+        }
+    }]
+}]

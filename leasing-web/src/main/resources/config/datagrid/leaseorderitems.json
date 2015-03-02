@@ -1,0 +1,33 @@
+{
+    "name": "leaseorderitems",
+    "entity": "com.github.quick4j.leasing.lease.orders.entity.LeaseOrderItem",
+    "columns": [
+        [
+            {
+                "field":"goodsName",
+                "title":"料具名称",
+                "width": 150
+            },
+            {
+                "field":"goodsSpec",
+                "title":"规格型号",
+                "width": 150
+            },
+            {
+                "field":"goodsLocation",
+                "title":"库位",
+                "width": 80
+            },
+            {
+                "field": "packages",
+                "title": "件数",
+                "width": 100
+            },
+            {
+                "field": "numbers",
+                "title": "数量",
+                "width": 100
+            }
+        ]
+    ]
+}
