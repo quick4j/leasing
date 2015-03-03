@@ -1,31 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<style>
-    .columns{}
-    .row{}
-    .row .columns{
-        display: inline;
-    }
-</style>
 <div style="padding: 5px;">
     <form method="post" id="newGoodsTypeForm">
         <input type="hidden" id="goodsTypeId" name="id">
-        <div class="row">
-            <div class="columns">
-                <span style="color: red">*</span>
-                <label>助记码</label>
-            </div>
-            <div class="columns">
-                <input class="textbox easyui-validatebox" type="text" id="goodsTypeCode"
+        <div class="form-group">
+            <label class="control-label required" for="goodsTypeCode">助记码</label>
+            <div class="form-field">
+                <input class="easyui-textbox" type="text" id="goodsTypeCode" style="width: 100%"
                        name="code" data-options="required:true">
             </div>
         </div>
-        <div class="row">
-            <div class="columns">
-                <span style="color: red">*</span>
-                <label>分类名称</label>
-            </div>
-            <div class="columns">
-                <input class="textbox easyui-validatebox" type="text" id="goodsTypeName"
+        <div class="form-group">
+            <label class="control-label required" for="goodsTypeName">分类名称</label>
+            <div class="form-field">
+                <input class="easyui-textbox" type="text" id="goodsTypeName" style="width: 100%"
                        name="name" data-options="required:true">
             </div>
         </div>
@@ -35,8 +22,10 @@
     function doInitData(win){
         var goodsType = win.getData('goodsType');
         $('#goodsTypeId').val(goodsType.id);
-        $('#goodsTypeCode').val(goodsType.code);
-        $('#goodsTypeName').val(goodsType.name);
+        $('#goodsTypeCode')
+                .textbox('setValue', goodsType.code)
+                .textbox('textbox').focus();
+        $('#goodsTypeName').textbox('setValue',goodsType.name);
     }
 
     function doSave(win){
@@ -54,9 +43,10 @@
             success: function(data){
                 var result = eval('(' + data + ')');
                 if(result.status == 200){
-                    $.messager.alert('提示', '数据保存成功！');
-                    win.getData('datagrid').datagrid('reload');
-                    callback();
+                    $.messager.alert('提示', '数据保存成功！','info', function(){
+                        win.getData('datagrid').datagrid('reload');
+                        callback();
+                    });
                 }else{
                     $.messager.alert('错误', '数据保存失败！' + result.message, 'error');
                 }

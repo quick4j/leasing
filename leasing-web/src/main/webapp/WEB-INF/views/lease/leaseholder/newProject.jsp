@@ -1,41 +1,27 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<style>
-    .columns{}
-    .row{}
-    .row .columns{
-        display: inline;
-    }
-</style>
 <div style="padding: 5px;">
     <form method="post" id="newProjectForm">
         <input type="hidden" id="holderName" name="holderName">
-        <div class="row">
-            <div class="columns">
-                <span style="color: red">*</span>
-                <label>承建单位</label>
-            </div>
-            <div class="columns">
-                <input class="textbox easyui-validatebox" type="text" id="holder"
+        <div class="form-group">
+            <label class="control-label required" for="holder">承建单位</label>
+            <div class="form-field">
+                <input type="text" id="holder" style="width: 100%"
                        name="holderId" data-options="required:true">
             </div>
         </div>
-        <div class="row">
-            <div class="columns">
-                <span style="color: red">*</span>
-                <label>助记码</label>
-            </div>
-            <div class="columns">
-                <input class="textbox easyui-validatebox" type="text" id="projCode"
+        <div class="form-group">
+            <label class="control-label required" for="projCode">助记码</label>
+            <div class="form-field">
+                <input class="easyui-textbox"
+                       type="text" id="projCode" style="width: 100%"
                        name="code" data-options="required:true">
             </div>
         </div>
-        <div class="row">
-            <div class="columns">
-                <span style="color: red">*</span>
-                <label>工程名称</label>
-            </div>
-            <div class="columns">
-                <input class="textbox easyui-validatebox" type="text" id="projName"
+        <div class="form-group">
+            <label class="control-label required" for="projName">工程名称</label>
+            <div class="form-field">
+                <input class="easyui-textbox"
+                       type="text" id="projName" style="width: 100%"
                        name="name" data-options="required:true">
             </div>
         </div>
@@ -54,7 +40,7 @@
             }
         });
 
-        $('#projCode').focus();
+        $('#projCode').textbox('textbox').focus();
     }
 
     function doSave(win){
@@ -66,6 +52,7 @@
     function doSaveAndNew(win){
         saveData(win, function(){
             $('#newProjectForm').form('reset');
+            $('#projCode').textbox('textbox').focus();
         });
     }
 
@@ -82,10 +69,9 @@
                 var result = eval('(' + data + ')');
                 if(result.status == 200){
                     $.messager.alert('提示', '数据保存成功！', 'info', function(){
-                        $('#projCode').focus();
+                        win.getData('datagrid').datagrid('reload');
+                        callback();
                     });
-                    win.getData('datagrid').datagrid('reload');
-                    callback();
                 }else{
                     $.messager.alert('错误', '数据保存失败！' + result.message, 'error');
                 }

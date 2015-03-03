@@ -1,30 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<style>
-    .columns{}
-    .row{}
-    .row .columns{
-        display: inline;
-    }
-</style>
 <div style="padding: 5px;">
     <form method="post" id="newHolderForm">
-        <div class="row">
-            <div class="columns">
-                <span style="color: red">*</span>
-                <label>助记码</label>
-            </div>
-            <div class="columns">
-                <input class="textbox easyui-validatebox" type="text" id="holderCode"
+        <div class="form-group">
+            <label class="control-label required" for="holderCode">助记码</label>
+            <div class="form-field">
+                <input class="easyui-textbox" type="text" id="holderCode" style="width: 100%"
                        name="code" data-options="required:true">
             </div>
         </div>
-        <div class="row">
-            <div class="columns">
-                <span style="color: red">*</span>
-                <label>承建单位名称</label>
-            </div>
-            <div class="columns">
-                <input class="textbox easyui-validatebox" type="text" id="holderName"
+        <div class="form-group">
+            <label class="control-label required" for="holderName">承建单位名称</label>
+            <div class="form-field">
+                <input class="easyui-textbox" type="text" id="holderName" style="width: 100%"
                        name="name" data-options="required:true">
             </div>
         </div>
@@ -32,7 +19,7 @@
 </div>
 <script>
     function doInitData(win){
-        $('#holderCode').focus();
+        $('#holderCode').textbox('textbox').focus();
     }
 
     function doSave(win){
@@ -44,7 +31,7 @@
     function doSaveAndNew(win){
         saveData(win, function(){
             $('#newHolderForm').form('clear');
-            $('#holderCode').focus();
+            $('#holderCode').textbox('textbox').focus();
         });
     }
 

@@ -110,7 +110,7 @@
                 var $LGrid = $('#leftGrid');
 
                 $.showModalDialog({
-                    title: '新建',
+                    title: '新建--承建单位',
                     width: 400,
                     height: 150,
                     content: 'url:lease/holder/new',
@@ -150,7 +150,7 @@
 
 
                 $.showModalDialog({
-                    title: '编辑',
+                    title: '编辑--承建单位',
                     width: 400,
                     height: 150,
                     content: 'url:lease/holder/'+selectedRow.id+'/edit',
@@ -181,9 +181,9 @@
                 var holderId = getHolder();
 
                 $.showModalDialog({
-                    title: '新建',
+                    title: '新建--工程',
                     width: 400,
-                    height: 300,
+                    height: 200,
                     content: 'url:lease/project/new',
                     data: {datagrid: $RGrid, holderId: holderId},
                     buttons:[{
@@ -221,9 +221,9 @@
                 }
 
                 $.showModalDialog({
-                    title: '编辑',
+                    title: '编辑--工程',
                     width: 400,
-                    height: 300,
+                    height: 200,
                     content: 'url:lease/project/'+selectedRow.id+'/edit',
                     data: {datagrid: $RGrid, project: selectedRow},
                     buttons:[{

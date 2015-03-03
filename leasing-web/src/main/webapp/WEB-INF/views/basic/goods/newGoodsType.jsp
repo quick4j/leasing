@@ -1,30 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<style>
-    .columns{}
-    .row{}
-    .row .columns{
-        display: inline;
-    }
-</style>
 <div style="padding: 5px;">
-    <form method="post" id="newGoodsTypeForm">
-        <div class="row">
-            <div class="columns">
-                <span style="color: red">*</span>
-                <label>助记码</label>
-            </div>
-            <div class="columns">
-                <input class="textbox easyui-validatebox" type="text" id="goodsTypeCode"
+    <form method="post" id="newGoodsTypeForm" style="width: 100%">
+        <div class="form-group">
+            <label class="control-label required" for="goodsTypeCode">助记码</label>
+            <div class="form-field">
+                <input class="easyui-textbox" type="text" id="goodsTypeCode" style="width: 100%"
                        name="code" data-options="required:true">
             </div>
         </div>
-        <div class="row">
-            <div class="columns">
-                <span style="color: red">*</span>
-                <label>分类名称</label>
-            </div>
-            <div class="columns">
-                <input class="textbox easyui-validatebox" type="text" id="goodsTypeName"
+        <div class="form-group">
+            <label class="control-label required" for="goodsTypeName">分类名称</label>
+            <div class="form-field">
+                <input class="easyui-textbox" type="text" id="goodsTypeName" style="width: 100%"
                        name="name" data-options="required:true">
             </div>
         </div>
@@ -32,7 +19,7 @@
 </div>
 <script>
     function doInitData(win){
-        $('#goodsTypeCode').focus();
+        $('#goodsTypeCode').textbox('textbox').focus();
     }
 
     function doSave(win){
@@ -44,7 +31,7 @@
     function doSaveAndNew(win){
         saveData(win, function(){
             $('#newGoodsTypeForm').form('clear');
-            $('#goodsTypeCode').focus();
+            $('#goodsTypeCode').textbox('textbox').focus();
         });
     }
 
@@ -57,9 +44,10 @@
             success: function(data){
                 var result = eval('(' + data + ')');
                 if(result.status == 200){
-                    $.messager.alert('提示', '数据保存成功！');
-                    win.getData('datagrid').datagrid('reload');
-                    callback();
+                    $.messager.alert('提示', '数据保存成功！','info', function(){
+                        win.getData('datagrid').datagrid('reload');
+                        callback();
+                    });
                 }else{
                     $.messager.alert('错误', '数据保存失败！' + result.message, 'error');
                 }
