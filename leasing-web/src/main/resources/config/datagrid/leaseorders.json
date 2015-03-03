@@ -33,10 +33,5 @@
                 "width": 100
             }
         ]
-    ],
-    "toolbar":[{
-        "iconCls": "icon-remove",
-        "text": "删除",
-        "handler":"doDelete"
-    }]
+    ]
 }
