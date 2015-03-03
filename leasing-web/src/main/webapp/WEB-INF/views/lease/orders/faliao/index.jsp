@@ -118,6 +118,34 @@
                     }]
                 });
             }
+
+            function doDelete(){
+                var $LGrid = $('#orders');
+
+                var selectedRow = $LGrid.datagrid('getSelected');
+                if(!selectedRow){
+                    $.messager.alert("警告", "请选择要删除的商品分类!", "warning");
+                    return;
+                }
+
+                $.messager.confirm('提示', '确认删除此条记录?', function(r){
+                    if(r){
+                        $.ajax({
+                            url: 'lease/orders/faliao/' + selectedRow.id + '/delete',
+                            success: function(data){
+                                if(data.status == 200){
+                                    $LGrid.datagrid('reload');
+                                }else{
+                                    $.messager.alert('错误', data.status + '<br>' + data.message, 'error');
+                                }
+                            },
+                            error: function(){
+                                $.messager.alert('错误', '操作过程中发生错误。', 'error');
+                            }
+                        });
+                    }
+                });
+            }
         </script>
     </body>
 </html>

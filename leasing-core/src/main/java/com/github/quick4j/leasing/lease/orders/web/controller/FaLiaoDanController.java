@@ -78,4 +78,21 @@ public class FaLiaoDanController {
 
         return new AjaxResponse(true, leaseOrder);
     }
+
+    @RequestMapping(
+            value = "/{id}/delete",
+            method = RequestMethod.GET,
+            produces = "application/json;charset=utf-8"
+    )
+    @ResponseBody
+    public AjaxResponse doDelete(@PathVariable("id") String id){
+        Criteria<LeaseOrderItem> itemCriteria = crudService.createCriteria(LeaseOrderItem.class);
+        LeaseOrderItem items = new LeaseOrderItem();
+        items.setOrderId(id);
+        itemCriteria.delete(items);
+
+        Criteria<LeaseOrder> criteria = crudService.createCriteria(LeaseOrder.class);
+        criteria.delete(id);
+        return new AjaxResponse(true);
+    }
 }
