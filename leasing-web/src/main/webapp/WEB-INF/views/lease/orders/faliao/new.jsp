@@ -19,7 +19,7 @@
         </div>
         <div data-options="region:'center', border: false" style="padding: 10px 30px 60px 30px;">
             <div class="easyui-layout" data-options="fit:true">
-                <div data-options="region:'north', split: false" style="height:150px;">
+                <div data-options="region:'north', split: false, border:false" style="height:150px;">
                     <div style="text-align: center; height: 60px; font-size: 25px; padding-top: 5px; letter-spacing: 8px;">周转工具管理中心发料单</div>
                     <div>
                         <table>
@@ -48,7 +48,19 @@
                         </table>
                     </div>
                 </div>
-                <div data-options="region:'south', split: false" style="height:60px;"></div>
+                <div data-options="region:'south', split: false, border:false" style="height:100px;">
+                    <div style="padding-left: 10px; padding-top: 10px;">
+                        提示
+                        <ul>
+                            <li>
+                                选中单据体的某一项后，则进入行编辑状态。此时可以添加（或修改）料具内容。
+                            </li>
+                            <li>
+                                在单据体的“件数”栏按“enter键”，可结束当前行编辑状态，并新增一行，按“ctrl+enter键”可结束当前行编辑状态。
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 <div data-options="region:'center', border: false">
                     <table id="items"></table>
                 </div>

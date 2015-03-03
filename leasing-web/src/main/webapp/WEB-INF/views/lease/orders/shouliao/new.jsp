@@ -50,7 +50,19 @@
                         </table>
                     </div>
                 </div>
-                <div data-options="region:'south', split: false" style="height:60px;"></div>
+                <div data-options="region:'south', split: false,border:false" style="height:100px;">
+                    <div style="padding-left: 10px; padding-top: 10px;">
+                        提示
+                        <ul>
+                            <li>
+                                选中单据体的某一项后，则进入行编辑状态。此时可以添加（或修改）料具内容。
+                            </li>
+                            <li>
+                                在单据体的“件数”栏按“enter键”，可结束当前行编辑状态，并新增一行，按“ctrl+enter键”可结束当前行编辑状态。
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 <div data-options="region:'center', border: false">
                     <table id="items"></table>
                 </div>
