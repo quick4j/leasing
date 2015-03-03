@@ -44,9 +44,10 @@
             success: function(data){
                 var result = eval('(' + data + ')');
                 if(result.status == 200){
-                    $.messager.alert('提示', '数据保存成功！');
-                    win.getData('datagrid').datagrid('reload');
-                    callback();
+                    $.messager.alert('提示', '数据保存成功！', 'info', function(){
+                        win.getData('datagrid').datagrid('reload');
+                        callback();
+                    });
                 }else{
                     $.messager.alert('错误', '数据保存失败！' + result.message, 'error');
                 }
