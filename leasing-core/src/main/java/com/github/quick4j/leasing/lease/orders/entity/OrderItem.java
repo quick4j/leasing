@@ -31,7 +31,7 @@ public abstract class OrderItem extends AbstractEntity{
     private String goodsLocation;
 
     @Column(name = "packages")
-    private int packages;
+    private Integer packages;
 
     @Column(name = "numbers", precision = 10, scale = 2)
     private BigDecimal numbers;
@@ -76,11 +76,11 @@ public abstract class OrderItem extends AbstractEntity{
         this.goodsLocation = goodsLocation;
     }
 
-    public int getPackages() {
+    public Integer getPackages() {
         return packages;
     }
 
-    public void setPackages(int packages) {
+    public void setPackages(Integer packages) {
         this.packages = packages;
     }
 
