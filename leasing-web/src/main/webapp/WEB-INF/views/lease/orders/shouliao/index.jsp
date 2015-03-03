@@ -10,19 +10,13 @@
         <link rel="stylesheet" href="static/js/vender/easyui/themes/icon.css">
     </head>
     <body class="easyui-layout">
-        <div data-options="region: 'north'" style="height: 50%; padding: 2px;">
-            <table class="quick4j-datagrid" id="orders"
-                   data-options="
-                            name: 'leaseorders',
-                            fit: true,
-                            striped: true,
-                            singleSelect:true,
-                            rownumbers: true,
-                            queryParams: {type: 'IN'},
-                            pagination: true,
-                            onClickRow: showOrderDetail"></table>
+        <!-- toolbar -->
+        <div data-options="region: 'north', border: true, split:false, minHeight: 35, maxHeight:35"
+             style="overflow: hidden; height: 35px;">
+            <div id="topToolbar"></div>
         </div>
-        <div data-options="region:'center', border: true">
+        <!-- 单据明细 -->
+        <div data-options="region: 'south'" style="height: 50%;">
             <div class="easyui-layout" data-options="fit:true">
                 <div data-options="region: 'north', border: true"
                      style="overflow: hidden; height: 38px;">
@@ -61,6 +55,19 @@
                 </div>
             </div>
         </div>
+        <div data-options="region:'center', border: true">
+            <table class="quick4j-datagrid" id="orders"
+                   data-options="
+                            name: 'leaseorders',
+                            fit: true,
+                            striped: true,
+                            singleSelect:true,
+                            border:false,
+                            rownumbers: true,
+                            queryParams: {type: 'IN'},
+                            pagination: true,
+                            onClickRow: showOrderDetail"></table>
+        </div>
         <!-- script -->
         <script src="static/js/vender/jquery-1.11.1.min.js"></script>
         <script src="static/js/vender/jquery.json-2.3.js"></script>
@@ -75,6 +82,7 @@
         <script>
             $(function(){
                 initToolbar();
+                initTopToolbar();
             });
 
             function formateHolder(value,row,index){
@@ -116,6 +124,45 @@
                         iconCls: 'icon-print',
                         handler: function(){}
                     }]
+                });
+            }
+
+            function initTopToolbar(){
+                $('#topToolbar').toolbar({
+                    data:[{
+                        id: 'tbBtnDelete',
+                        text: '删除',
+                        iconCls: 'icon-remove',
+                        handler: doDelete
+                    }]
+                });
+            }
+
+            function doDelete(){
+                var $LGrid = $('#orders');
+
+                var selectedRow = $LGrid.datagrid('getSelected');
+                if(!selectedRow){
+                    $.messager.alert("警告", "请选择要删除的单据!", "warning");
+                    return;
+                }
+
+                $.messager.confirm('提示', '确认删除此条记录?', function(r){
+                    if(r){
+                        $.ajax({
+                            url: 'lease/orders/faliao/' + selectedRow.id + '/delete',
+                            success: function(data){
+                                if(data.status == 200){
+                                    $LGrid.datagrid('reload');
+                                }else{
+                                    $.messager.alert('错误', data.status + '<br>' + data.message, 'error');
+                                }
+                            },
+                            error: function(){
+                                $.messager.alert('错误', '操作过程中发生错误。', 'error');
+                            }
+                        });
+                    }
                 });
             }
         </script>
