@@ -528,7 +528,8 @@
                     save: function(){
                         save();
                     },
-                    deleteItem: deleteItem
+                    deleteItem: deleteItem,
+                    newOrderItem: newOrderItem
                 }
             })();
 

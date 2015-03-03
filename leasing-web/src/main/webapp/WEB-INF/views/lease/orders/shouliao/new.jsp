@@ -19,7 +19,7 @@
         </div>
         <div data-options="region:'center', border: false" style="padding: 10px 30px 60px 30px;">
             <div class="easyui-layout" data-options="fit:true">
-                <div data-options="region:'north', split: false" style="height:150px;">
+                <div data-options="region:'north', split: false,border:false" style="height:150px;">
                     <div style="text-align: center; height: 60px; font-size: 25px; padding-top: 5px; letter-spacing: 8px;">
                         周转工具管理中心收料单
                     </div>
