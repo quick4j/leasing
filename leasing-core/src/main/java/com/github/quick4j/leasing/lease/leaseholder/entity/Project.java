@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.quick4j.core.entity.AbstractEntity;
 import com.github.quick4j.core.entity.Entity;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -22,21 +23,25 @@ public class Project extends AbstractEntity {
     private String id;
 
     @NotNull
-    @Length(max = 4)
+    @NotEmpty
+    @Length(max = 50)
     @Column(name = "proj_code", length = 100)
     private String code;
 
     @NotNull
-    @Length(max = 1000)
+    @NotEmpty
+    @Length(max = 900)
     @Column(name = "proj_name", length = 1000)
     private String name;
 
     @NotNull
+    @NotEmpty
     @Column(name = "holder_id", length = 32)
     private String holderId;
 
     @NotNull
-    @Length(max = 1000)
+    @NotEmpty
+    @Length(max = 900)
     @Column(name = "holder_name", length = 1000)
     private String holderName;
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.quick4j.core.entity.AbstractEntity;
 import com.github.quick4j.core.entity.Entity;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -22,11 +23,13 @@ public class LeaseHoder extends AbstractEntity {
     private String id;
 
     @NotNull
-    @Length(min = 1, max = 4)
+    @NotEmpty
+    @Length(max = 50)
     @Column(name = "holder_code", length = 100)
     private String code;
 
     @NotNull
+    @NotEmpty
     @Length(max = 1000)
     @Column(name = "holder_name", length = 1000)
     private String name;

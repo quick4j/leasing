@@ -3,11 +3,15 @@ package com.github.quick4j.leasing.basic.goods.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.quick4j.core.entity.AbstractEntity;
 import com.github.quick4j.core.entity.Entity;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -21,18 +25,23 @@ public class Goods extends AbstractEntity {
     private String id;
 
     @NotNull
+    @NotEmpty
+    @Size(min = 2, max = 20)
     @Column(name = "goods_code", length = 100)
     private String code;
 
     @NotNull
+    @NotEmpty
     @Column(name = "goods_name", length = 500)
     private String name;
 
     @NotNull
+    @NotEmpty
     @Column(name = "goods_type", length = 100)
     private String type;
 
     @Column(name = "goods_spec", length = 100)
+//    @Pattern(regexp = "^[0-9]+\\.{0,1}[0-9]{0,2}$")
     private String spec;//规格型号
 
     @Column(name = "goods_unit", length = 100)

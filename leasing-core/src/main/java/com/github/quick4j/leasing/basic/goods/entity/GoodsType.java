@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.quick4j.core.entity.AbstractEntity;
 import com.github.quick4j.core.entity.Entity;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -23,11 +24,13 @@ public class GoodsType extends AbstractEntity {
     private String id;
 
     @NotNull
-    @Size(min = 3, max = 4)
+    @Size(min = 2, max = 20)
+    @NotEmpty
     @Column(name = "gc_code", length = 100, nullable = false)
     private String code;
 
     @NotNull
+    @NotEmpty
     @Length(min = 1)
     @Column(name = "gc_name", length = 500, nullable = false)
     private String name;
