@@ -24,12 +24,20 @@
     <!-- 开启AOP监听 只对当前配置文件有效 -->
     <aop:aspectj-autoproxy expose-proxy="true"/>
 
+    <!--<bean id="dataSource"-->
+          <!--class="org.apache.commons.dbcp.BasicDataSource"-->
+          <!--destroy-method="close"-->
+          <!--p:driverClassName="${db.driver}"-->
+          <!--p:url="${db.url}"-->
+          <!--p:username="${db.username}"-->
+          <!--p:testWhileIdle="true"-->
+          <!--p:password="${db.password}"/>-->
+
     <bean id="dataSource"
-          class="org.apache.commons.dbcp.BasicDataSource"
-          destroy-method="close"
-          p:driverClassName="${db.driver}"
-          p:url="${db.url}"
-          p:username="${db.username}"
+          class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          p:driverClass="${db.driver}"
+          p:jdbcUrl="${db.url}"
+          p:user="${db.username}"
           p:password="${db.password}"/>
 
     <!--事务管理器配置-->
