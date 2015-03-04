@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.github.quick4j.core.entity.AbstractEntity;
 import com.github.quick4j.core.entity.Entity;
 import com.github.quick4j.leasing.lease.orders.OrderType;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,14 +21,14 @@ public class LeaseOrder extends OrderHeader {
     @Column(length = 32)
     private String id;
 
-    @NotNull
+    @NotEmpty
     @Column(name = "holder_id",length = 32, nullable = false)
     private String holderId;
 
     @Column(name = "hoder_name", length = 1000)
     private String holderName;
 
-    @NotNull
+    @NotEmpty
     @Column(name = "project_id", length = 32, nullable = false)
     private String projectId;
 

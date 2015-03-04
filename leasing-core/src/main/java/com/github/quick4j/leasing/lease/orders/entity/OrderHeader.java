@@ -3,6 +3,7 @@ package com.github.quick4j.leasing.lease.orders.entity;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.github.quick4j.core.entity.AbstractEntity;
 import com.github.quick4j.leasing.lease.orders.OrderType;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.EnumType;
@@ -17,6 +18,7 @@ public abstract class OrderHeader extends AbstractEntity{
     @Column(name = "code", length = 100)
     private String code;
 
+    @NotEmpty
     @JsonDeserialize(using = OpenTimeDeserializer.class)
     @Column(name = "open_time")
     private long openTime;

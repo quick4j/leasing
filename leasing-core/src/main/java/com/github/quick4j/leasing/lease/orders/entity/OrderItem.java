@@ -1,6 +1,7 @@
 package com.github.quick4j.leasing.lease.orders.entity;
 
 import com.github.quick4j.core.entity.AbstractEntity;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -12,15 +13,15 @@ import java.math.BigDecimal;
  */
 @MappedSuperclass
 public abstract class OrderItem extends AbstractEntity{
-    @NotNull
+    @NotEmpty
     @Column(name = "order_id", length = 32, nullable = false)
     private String orderId;
 
-    @NotNull
+    @NotEmpty
     @Column(name = "goods_id", length = 32, nullable = false)
     private String goodsId;
 
-    @NotNull
+    @NotEmpty
     @Column(name = "goods_name", length = 500)
     private String goodsName;
 
@@ -30,6 +31,7 @@ public abstract class OrderItem extends AbstractEntity{
     @Column(name = "goods_location")
     private String goodsLocation;
 
+    @NotEmpty
     @Column(name = "packages")
     private Integer packages;
 
