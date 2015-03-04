@@ -11,12 +11,12 @@
     </head>
     <body class="easyui-layout">
         <!-- toolbar -->
-        <div data-options="region: 'north', border: true, split:false, minHeight: 35, maxHeight:35"
+        <div data-options="region: 'north', border: true, minHeight: 35, maxHeight:35"
              style="overflow: hidden; height: 35px;">
             <div id="topToolbar"></div>
         </div>
         <!-- 单据明细 -->
-        <div data-options="region: 'south'" style="height: 50%;">
+        <div data-options="region: 'south', split:true" style="height: 50%;">
             <div class="easyui-layout" data-options="fit:true">
                 <div data-options="region: 'north', border: true"
                      style="overflow: hidden; height: 38px;">

@@ -16,13 +16,13 @@
             <div id="topToolbar"></div>
         </div>
         <!-- 单据明细 -->
-        <div data-options="region: 'south'" style="height: 50%;">
+        <div data-options="region: 'south', split:true" style="height: 50%;">
             <div class="easyui-layout" data-options="fit:true">
                 <div data-options="region: 'north', border: true"
                      style="overflow: hidden; height: 38px;">
                     <div id="tb"></div>
                 </div>
-                <div data-options="region:'center', border: false" style="padding-top: 3px;">
+                <div data-options="region:'center', border:false" style="padding-top: 3px;">
                     <div style="height:280px;width:800px;left:10%;position:relative;">
                         <div class="order-sm-title">
                             周转工具管理中心收料单

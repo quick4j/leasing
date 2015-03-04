@@ -16,9 +16,9 @@
             <div id="topToolbar"></div>
         </div>
         <!-- 单据明细 -->
-        <div data-options="region: 'south'" style="height: 50%;">
+        <div data-options="region: 'south', split:true" style="height: 50%;">
             <div class="easyui-layout" data-options="fit:true">
-                <div data-options="region: 'north', border: true"
+                <div data-options="region: 'north'"
                      style="overflow: hidden; height: 38px;">
                     <div id="tb"></div>
                 </div>
@@ -63,6 +63,7 @@
                     fit: true,
                     striped: true,
                     singleSelect:true,
+                    border:false,
                     rownumbers: true,
                     queryParams: {type: 'IN'},
                     pagination: true,
