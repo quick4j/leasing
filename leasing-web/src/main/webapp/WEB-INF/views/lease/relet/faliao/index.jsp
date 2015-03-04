@@ -24,7 +24,7 @@
                 </div>
                 <div data-options="region:'center', border: false" style="padding-top: 3px;">
                     <div style="height:280px;width:800px;left:10%;position:relative;">
-                        <div style="text-align: center;height: 40px;font-size: 20px; padding-top: 5px; letter-spacing: 8px;">
+                        <div class="order-sm-title">
                             周转工具管理中心租借发料单
                         </div>
                         <div>
@@ -99,7 +99,6 @@
                 $('#holder').text(holder);
                 var opentime = quick4j.util.dateFormate.format(row.openTime, 'YYYY-MM-DD');
                 $('#opentime').text(opentime);
-                $('#carnumber').text(row.carNumber);
                 $('#code').text(row.code);
 
                 $('#details').datagrid('reload', {
@@ -111,7 +110,6 @@
             function clearOrderDetail(){
                 $('#holder').text('');
                 $('#opentime').text('');
-                $('#carnumber').text('');
                 $('#code').text('');
 
                 $('#details').datagrid('loadData',{});
@@ -151,7 +149,7 @@
                 $.messager.confirm('提示', '确认删除此条记录?', function(r){
                     if(r){
                         $.ajax({
-                            url: 'lease/orders/faliao/' + selectedRow.id + '/delete',
+                            url: 'lease/relet/faliao/' + selectedRow.id + '/delete',
                             success: function(data){
                                 if(data.status == 200){
                                     $LGrid.datagrid('reload');

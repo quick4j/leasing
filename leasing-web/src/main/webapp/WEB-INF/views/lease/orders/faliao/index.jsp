@@ -11,21 +11,20 @@
     </head>
     <body class="easyui-layout">
         <!-- toolbar -->
-        <div data-options="region: 'north', border: true, split:false, minHeight: 35, maxHeight:35"
+        <div data-options="region: 'north', border: true, minHeight: 35, maxHeight:35"
              style="overflow: hidden; height: 35px;">
             <div id="topToolbar"></div>
         </div>
         <!-- 单据明细 -->
-        <div data-options="region: 'south', border: true, split:false"
-             style="overflow: hidden; height: 50%;">
+        <div data-options="region:'south', border:true, split:true" style="height: 50%;">
             <div class="easyui-layout" data-options="fit:true">
-                <div data-options="region: 'north', border: true"
+                <div data-options="region: 'north'"
                      style="overflow: hidden; height: 38px;">
                     <div id="tb"></div>
                 </div>
                 <div data-options="region:'center', border: false" style="padding-top: 3px;">
                     <div style="height:280px;width:800px;left:10%;position:relative;">
-                        <div style="text-align: center;height: 40px;font-size: 20px; padding-top: 5px; letter-spacing: 8px;">
+                        <div class="order-sm-title">
                             周转工具管理中心发料单
                         </div>
                         <div>
@@ -57,7 +56,7 @@
             </div>
         </div>
         <!-- 列表 -->
-        <div data-options="region:'center', border: true">
+        <div data-options="region:'center'">
             <table class="quick4j-datagrid" id="orders"
                    data-options="
                     name: 'leaseorders',

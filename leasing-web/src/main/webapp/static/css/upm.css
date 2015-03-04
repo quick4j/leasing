@@ -11,3 +11,6 @@
 .required{background:url('icons/muted.jpg') no-repeat right center;}
 .control-label{padding-top: 7px;padding-right: 10px;margin-bottom: 0; text-align: right; display: inline-block; width: 20%;}
 .form-field{width: 70%; display: inline-block; padding-left: 5px;}
+
+.order-title{text-align: center; height: 60px; font-size: 25px; padding-top: 5px; letter-spacing: 8px;}
+.order-sm-title{text-align: center;height: 40px;font-size: 20px; padding-top: 5px; letter-spacing: 8px;}

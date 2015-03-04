@@ -24,7 +24,7 @@
                 </div>
                 <div data-options="region:'center', border: false" style="padding-top: 3px;">
                     <div style="height:280px;width:800px;left:10%;position:relative;">
-                        <div style="text-align: center;height: 40px;font-size: 20px; padding-top: 5px; letter-spacing: 8px;">
+                        <div class="order-sm-title">
                             周转工具管理中心收料单
                         </div>
                         <div>
