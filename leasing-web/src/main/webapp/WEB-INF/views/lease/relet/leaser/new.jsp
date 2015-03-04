@@ -1,30 +1,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<style>
-    .columns{}
-    .row{}
-    .row .columns{
-        display: inline;
-    }
-</style>
 <div style="padding: 5px;">
     <form method="post" id="newLeaserForm">
-        <div class="row">
-            <div class="columns">
-                <span style="color: red">*</span>
-                <label for="leaserCode">助记码</label>
-            </div>
-            <div class="columns">
-                <input class="easyui-textbox" type="text" id="leaserCode"
+        <div class="form-group">
+            <label class="control-label required" for="leaserCode">助记码</label>
+            <div class="form-field">
+                <input class="easyui-textbox"
+                       type="text" id="leaserCode" style="width: 100%"
                        name="code" data-options="required:true">
             </div>
         </div>
-        <div class="row">
-            <div class="columns">
-                <span style="color: red">*</span>
-                <label for="leaserName">名称</label>
-            </div>
-            <div class="columns">
-                <input class="easyui-textbox" type="text" id="leaserName"
+        <div class="form-group">
+            <label class="control-label required" for="leaserName">名称</label>
+            <div class="form-field">
+                <input class="easyui-textbox"
+                       type="text" id="leaserName" style="width: 100%"
                        name="name" data-options="required:true">
             </div>
         </div>
