@@ -6,6 +6,7 @@ import com.github.quick4j.core.util.JsonUtils;
 import com.github.quick4j.core.web.http.AjaxResponse;
 import com.github.quick4j.leasing.lease.orders.OrderType;
 import com.github.quick4j.leasing.lease.relet.entity.ReletOrder;
+import com.github.quick4j.leasing.lease.relet.entity.ReletOrderItem;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,6 +73,11 @@ public class ShouLiaoDanController {
     )
     @ResponseBody
     public AjaxResponse doDelete(@PathVariable("id") String id){
+        ReletOrderItem items = new ReletOrderItem();
+        items.setOrderId(id);
+        Criteria<ReletOrderItem> itemsCriteria = crudService.createCriteria(ReletOrderItem.class);
+        itemsCriteria.delete(items);
+
         Criteria<ReletOrder> criteria = crudService.createCriteria(ReletOrder.class);
         criteria.delete(id);
         return new AjaxResponse(true);
