@@ -20,7 +20,7 @@
         <div data-options="region:'center', border: false" style="padding: 10px 30px 60px 30px;">
             <div class="easyui-layout" data-options="fit:true">
                 <div data-options="region:'north', split: false,border:false" style="height:150px;overflow: hidden;">
-                    <div style="text-align: center; height: 60px; font-size: 25px; padding-top: 5px; letter-spacing: 8px;">
+                    <div class="order-title">
                         周转工具管理中心租借发料单
                     </div>
                     <div style="overflow: hidden">
@@ -546,16 +546,19 @@
                             data: {order: $.toJSON(order)},
                             success: function(data){
                                 if(data.status == 200){
-                                    $.messager.alert('提示','单据保存成功！');
-                                    $('#tbBtnSave').linkbutton('disable');
-                                    $('#tbBtnPrint').linkbutton('enable');
+//                                    $.messager.alert('提示','单据保存成功！');
+//                                    $('#tbBtnSave').linkbutton('disable');
+//                                    $('#tbBtnPrint').linkbutton('enable');
+                                    location.href = 'lease/relet/faliao/'+data.data.id;
                                 }else{
                                     $.messager.alert('错误','单据保存失败！' + '<br>' + data.message, 'error');
+                                    $('#tbBtnSave').linkbutton('enable');
                                 }
 
                             },
                             error: function(){
                                 $.messager.alert('提示','单据保存失败！');
+                                $('#tbBtnSave').linkbutton('enable');
                             }
                         });
                     };

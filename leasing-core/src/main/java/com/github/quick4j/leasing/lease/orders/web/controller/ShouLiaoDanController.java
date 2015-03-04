@@ -1,5 +1,6 @@
 package com.github.quick4j.leasing.lease.orders.web.controller;
 
+import com.github.quick4j.core.service.Criteria;
 import com.github.quick4j.core.service.CrudService;
 import com.github.quick4j.core.util.JsonUtils;
 import com.github.quick4j.core.web.http.AjaxResponse;
@@ -9,10 +10,8 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -57,5 +56,16 @@ public class ShouLiaoDanController {
         Map<String, String> result = new HashMap<String, String>();
         result.put("id", order.getId());
         return new AjaxResponse(true, result);
+    }
+
+    @RequestMapping(
+            value = "/{id}",
+            method = RequestMethod.GET
+    )
+    public String showOrderDetails(@PathVariable("id") String id, Model model){
+        Criteria<LeaseOrder> criteria = crudService.createCriteria(LeaseOrder.class);
+        LeaseOrder leaseOrder = criteria.findOne(id);
+        model.addAttribute("order", leaseOrder);
+        return LOCATION + "details";
     }
 }

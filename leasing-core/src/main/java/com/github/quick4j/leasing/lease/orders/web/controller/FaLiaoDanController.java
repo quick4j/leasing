@@ -11,7 +11,9 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -62,21 +64,13 @@ public class FaLiaoDanController {
 
     @RequestMapping(
             value = "/{id}",
-            method = RequestMethod.GET,
-            produces = "application/json;charset=utf-8"
+            method = RequestMethod.GET
     )
-    @ResponseBody
-    public AjaxResponse showOrderDetails(@PathVariable("id") String id){
+    public String showOrderDetails(@PathVariable("id") String id, Model model){
         Criteria<LeaseOrder> criteria = crudService.createCriteria(LeaseOrder.class);
         LeaseOrder leaseOrder = criteria.findOne(id);
-
-        Criteria<LeaseOrderItem> itemsCriteria = crudService.createCriteria(LeaseOrderItem.class);
-        LeaseOrderItem template = new LeaseOrderItem();
-        template.setOrderId(id);
-        List<LeaseOrderItem> items = itemsCriteria.findAll(template);
-        leaseOrder.setItems(items);
-
-        return new AjaxResponse(true, leaseOrder);
+        model.addAttribute("order", leaseOrder);
+        return LOCATION + "details";
     }
 
     @RequestMapping(
