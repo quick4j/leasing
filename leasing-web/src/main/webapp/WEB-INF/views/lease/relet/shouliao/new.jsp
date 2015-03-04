@@ -53,14 +53,17 @@
                     </div>
                 </div>
                 <div data-options="region:'south', split: false,border:false" style="height:100px;">
-                    <div style="padding-left: 10px; padding-top: 10px;">
-                        提示
-                        <ul>
+                    <div style="padding-left: 10px; padding-top: 10px; color: #0000ff; font-size: 14px;">
+                        提示：
+                        <ul style="margin: 0">
+                            <li>
+                                凡是显示<span style="color: red">红色</span>输入框的都是必填项。
+                            </li>
                             <li>
                                 选中单据体的某一项后，则进入行编辑状态。此时可以添加（或修改）料具内容。
                             </li>
                             <li>
-                                在单据体的“件数”栏按“enter键”，可结束当前行编辑状态，并新增一行，按“ctrl+enter键”可结束当前行编辑状态。
+                                在单据体的<strong>“件数”栏</strong>按<strong>“enter键”</strong>，可结束当前行编辑状态，并新增一行，按<strong>“ctrl+enter键”</strong>可结束当前行编辑状态。
                             </li>
                         </ul>
                     </div>
@@ -171,7 +174,12 @@
                             rownumbers: true,
                             fit: true,
                             striped: true,
-                            singleSelect: true
+                            singleSelect: true,
+                            toolbar: [{
+                                text:'添加新行',
+                                iconCls: 'icon-add',
+                                handler: Order.newOrderItem
+                            }]
                         }).datagrid('addEventListener', [{
                             name: 'onClickRow',
                             handler: function(index,row){
@@ -209,19 +217,15 @@
 
                                 if(continueEditing){
                                     newOrderItem();
-                                    setTimeout(function(){
-                                        var newRowIndex = $itemGrid.datagrid('getRows').length - 1;
-                                        $itemGrid.datagrid('beginEdit', newRowIndex);
-                                    }, 5);
                                 }
                             }
                         }]);
 
-                        newOrderItem();
                     },
                     initHolderPlugin = function(){
                         $hodlerPlugin.textbox({
                             buttonIcon: 'icon-search',
+                            required:true,
                             onClickButton: function(){
                                 showSearchProjectDialog();
                             }
@@ -253,6 +257,7 @@
                     initLeaserPlugin = function(){
                         $leaserPlugin.textbox({
                             buttonIcon: 'icon-search',
+                            required:true,
                             onClickButton: function(){
                                 showSearchLeaserDialog();
                             }
@@ -260,7 +265,6 @@
                                 .bind('keypress', function(event){
                                     setTimeout(function(){
                                         var value = $(event.target).val();
-                                        console.log('===>' + value);
                                         if(value.length > 0){
                                             showSearchLeaserDialog();
                                         }
@@ -379,6 +383,8 @@
                         });
                     },
                     newOrderItem = function(){
+                        if($itemGrid.datagrid('getEditingRow')) return;
+
                         $itemGrid.datagrid('appendRow',{
                             goodsId: '',
                             goodsName: '',
@@ -387,6 +393,11 @@
                             packages: 0,
                             numbers: 0
                         });
+
+                        setTimeout(function(){
+                            var newRowIndex = $itemGrid.datagrid('getRows').length - 1;
+                            $itemGrid.datagrid('beginEdit', newRowIndex);
+                        }, 5);
                     },
                     registerEditorsEvent = function(){
                         bindCoderEditorEvent();
@@ -516,11 +527,6 @@
                         }
                     },
                     deleteItem = function(index){
-                        if($itemGrid.datagrid('getRows').length == 1){
-                            $itemGrid.datagrid('endEdit', index);
-                            return;
-                        }
-
                         $itemGrid.datagrid('endEdit', index).datagrid('deleteRow', index);
                         resetEditingIndex();
                         continueEditing = false;
@@ -529,6 +535,44 @@
                         editingIndex = -1;
                     },
                     save = function(){
+                        if(!$('#holder').textbox('isValid')){
+                            $.messager.alert('警告', '请选择承建单位', 'warning', function(){
+                                $('#holder').textbox('textbox').focus();
+                            });
+                            return;
+                        }
+
+                        if($('#holder').textbox('getValue') == $('#holder').textbox('getText')){
+                            $.messager.alert('警告', '请选择承建单位', 'warning', function(){
+                                $('#holder').textbox('textbox').focus();
+                            });
+                            return;
+                        }
+
+                        if(!$('#leaser').textbox('isValid')){
+                            $.messager.alert('警告', '请选择租借单位', 'warning', function(){
+                                $('#leaser').textbox('textbox').focus();
+                            });
+                            return;
+                        }
+
+                        if($('#leaser').textbox('getValue') == $('#leaser').textbox('getText')){
+                            $.messager.alert('警告', '请选择租借单位', 'warning', function(){
+                                $('#leaser').textbox('textbox').focus();
+                            });
+                            return;
+                        }
+
+                        if($itemGrid.datagrid('getChanges', 'inserted').length==0){
+                            $.messager.alert('警告', '此单据无效，请添加料具。','warning');
+                            return;
+                        }
+
+                        if($itemGrid.datagrid('getEditingRow')){
+                            $.messager.alert('警告', '存在未编辑完的单据项，请编辑完后再保存。','warning');
+                            return;
+                        }
+
                         var order = {
                             openTime: $('#openTime').datebox('getValue'),
                             holderId: $('#holderId').val(),
@@ -585,7 +629,8 @@
                     save: function(){
                         save();
                     },
-                    deleteItem: deleteItem
+                    deleteItem: deleteItem,
+                    newOrderItem: newOrderItem
                 }
             })();
 
