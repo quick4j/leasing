@@ -146,7 +146,6 @@
                                     editor: {
                                         type: 'numberbox',
                                         options: {
-                                            validType: {min: 1},
                                             required:true
                                         }
                                     }
