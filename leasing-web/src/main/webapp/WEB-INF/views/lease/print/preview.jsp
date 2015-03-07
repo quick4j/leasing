@@ -11,12 +11,8 @@
     </head>
     <body class="easyui-layout">
         <div data-options="region:'center', border: false" style="padding-top: 3px;">
-            <div data-options="region: 'north', border: true, split:false, minHeight: 35, maxHeight:35"
-                 style="overflow: hidden; height: 35px;">
-                <div id="topToolbar"></div>
-            </div>
             <div style="height:280px;width:800px;left:10%;position:relative;">
-                <div style="text-align: center;height: 40px;font-size: 20px; padding-top: 5px; letter-spacing: 8px;">
+                <div class="order-title">
                     周转工具管理中心发料单
                 </div>
                 <div>
