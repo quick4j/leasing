@@ -29,13 +29,13 @@ public class SummaryController {
     private CrudService<SummaryResult> crudService;
 
 
-    @RequestMapping(
-            value = "/leasing",
-            method = RequestMethod.GET
-    )
-    public String showQueryLeasing(){
-        return LOCATION + "general";
-    }
+//    @RequestMapping(
+//            value = "/leasing",
+//            method = RequestMethod.GET
+//    )
+//    public String showQueryLeasing(){
+//        return LOCATION + "general";
+//    }
 //
 //    @RequestMapping(
 //            value = "/leasing2",
@@ -45,15 +45,14 @@ public class SummaryController {
 //        logger.info("===> showQueryLeasing.");
 //        return LOCATION + "general2";
 //    }
-//
-//    @RequestMapping(
-//            value = "/leasing3",
-//            method = RequestMethod.GET
-//    )
-//    public String showQueryLeasing3(){
-//        logger.info("===> showQueryLeasing.");
-//        return LOCATION + "general3";
-//    }
+
+    @RequestMapping(
+            value = "/leasing",
+            method = RequestMethod.GET
+    )
+    public String showQueryLeasing3(){
+        return LOCATION + "general3";
+    }
 
     @RequestMapping(
             value = "/leasing",
