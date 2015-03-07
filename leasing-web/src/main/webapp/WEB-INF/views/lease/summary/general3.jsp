@@ -76,8 +76,8 @@
                     singleSelect: true,
                     title:'料具汇总',
                     columns: [[
-                        {field: 'goodsName', title: '品名', width: 200, sortable: true},
-                        {field: 'goodsSpec', title: '规格', width: 150, sortable: true},
+                        {field: 'goodsName', title: '品名', width: 200},
+                        {field: 'goodsSpec', title: '规格', width: 150},
                         {field: 'packages', title: '在用量', width: 150},
                         {field: 'numbers', title: '米数', width: 200}
                     ]],
@@ -90,7 +90,6 @@
                     }],
                     url: 'lease/summary/leasing',
                     queryParams: {_loading: false},
-                    remoteSort:false,
                     sortName: 'goodsName',
                     onBeforeLoad: function(param){
                         return param._loading;
@@ -127,6 +126,7 @@
                     },
                     onSelect: function(index,row){
                         queryProjectsForHolder(row.id);
+                        clearSummaryGrid();
                     }
                 });
             }
@@ -137,7 +137,6 @@
                     title:'承建项目',
                     fit:true,
                     striped: true,
-                    singleSelect:true,
                     border:false,
                     columns:[[
                         {field:'code', title:'助记码', width: 100},
@@ -187,6 +186,14 @@
                 }
 
                 $('#summaryGrid').datagrid('load',params);
+            }
+
+            function clearSummaryGrid(){
+                var $summaryGrid = $('#summaryGrid');
+                var length = $summaryGrid.datagrid('getRows').length;
+                for(var i=length-1; i>-1; i--){
+                    $summaryGrid.datagrid('deleteRow', i);
+                }
             }
         </script>
     </body>
