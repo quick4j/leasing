@@ -60,6 +60,9 @@
         <script>
             $(function(){
                 initToolbar();
+
+                var opentime = quick4j.util.dateFormate.format(${order.openTime}, 'YYYY-MM-DD');
+                $('#opentime').text(opentime);
             });
             function initToolbar(){
                 $('#tb').toolbar({
