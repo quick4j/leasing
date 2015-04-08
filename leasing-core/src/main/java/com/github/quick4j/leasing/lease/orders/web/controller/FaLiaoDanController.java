@@ -13,12 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -40,7 +38,7 @@ public class FaLiaoDanController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
-    public String doShowBlankOutboundOrder(){
+    public String doShowBlankOrder(){
         return LOCATION + "new";
     }
 
@@ -60,6 +58,29 @@ public class FaLiaoDanController {
         Map<String, String> result = new HashMap<String, String>();
         result.put("id", order.getId());
         return new AjaxResponse(true, result);
+    }
+
+    @RequestMapping(
+            value = "/{id}/edit",
+            method = RequestMethod.GET
+    )
+    public String showEditForm(@PathVariable("id") String id, Model model){
+        Criteria<LeaseOrder> criteria = crudService.createCriteria(LeaseOrder.class);
+        LeaseOrder leaseOrder = criteria.findOne(id);
+        model.addAttribute("order", leaseOrder);
+        return LOCATION + "edit";
+    }
+
+    @RequestMapping(
+            value = "/{id}/edit",
+            method = RequestMethod.POST,
+            produces = "application/json;charset=utf-8"
+    )
+    @ResponseBody
+    public AjaxResponse doUpdate(@RequestParam("leaseorder") String leaseOrder){
+        LeaseOrder order = JsonUtils.formJson(leaseOrder, LeaseOrder.class);
+        crudService.save(order);
+        return new AjaxResponse(true);
     }
 
     @RequestMapping(
