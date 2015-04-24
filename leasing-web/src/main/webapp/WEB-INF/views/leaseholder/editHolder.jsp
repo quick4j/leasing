@@ -38,7 +38,7 @@
     function saveData(win, callback){
         var holderid = $('#holderId').val();
         $('#newHolderForm').form('submit', {
-            url: 'lease/holder/'+ holderid +'/edit',
+            url: 'leasing/holder/'+ holderid +'/edit',
             onSubmit: function(){
                 return true;
             },

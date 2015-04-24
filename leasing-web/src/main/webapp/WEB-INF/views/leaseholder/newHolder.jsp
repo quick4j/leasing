@@ -37,7 +37,7 @@
 
     function saveData(win, callback){
         $('#newHolderForm').form('submit', {
-            url: 'lease/holder/new',
+            url: 'leasing/holder/new',
             onSubmit: function(){
                 return true;
             },

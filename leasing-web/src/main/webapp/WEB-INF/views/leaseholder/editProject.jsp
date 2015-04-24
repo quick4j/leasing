@@ -61,7 +61,7 @@
         var projectId = $('#projId').val();
 
         $('#newProjectForm').form('submit', {
-            url: 'lease/project/'+projectId+'/edit',
+            url: 'leasing/project/'+projectId+'/edit',
             onSubmit: function(){
                 var holderName = $('#holder').combobox('getText');
                 $('#holderName').val(holderName);

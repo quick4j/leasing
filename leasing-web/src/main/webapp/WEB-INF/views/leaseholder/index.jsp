@@ -113,7 +113,7 @@
                     title: '新建--承建单位',
                     width: 400,
                     height: 150,
-                    content: 'url:lease/holder/new',
+                    content: 'url:leasing/holder/new',
                     data: {datagrid: $LGrid},
                     buttons:[{
                         text: '保存并继续新增',
@@ -144,7 +144,7 @@
                 var $LGrid = $('#leftGrid');
                 var selectedRow = $LGrid.datagrid('getSelected');
                 if(!selectedRow){
-                    $.messager.alert("警告", "请选择要编辑的商品!", "warning");
+                    $.messager.alert("警告", "请选择要编辑的数据!", "warning");
                     return;
                 }
 
@@ -153,7 +153,7 @@
                     title: '编辑--承建单位',
                     width: 400,
                     height: 150,
-                    content: 'url:lease/holder/'+selectedRow.id+'/edit',
+                    content: 'url:leasing/holder/'+selectedRow.id+'/edit',
                     data: {datagrid: $LGrid, holder: selectedRow},
                     buttons:[{
                         text: '保存',
@@ -184,7 +184,7 @@
                     title: '新建--工程',
                     width: 400,
                     height: 200,
-                    content: 'url:lease/project/new',
+                    content: 'url:leasing/project/new',
                     data: {datagrid: $RGrid, holderId: holderId},
                     buttons:[{
                         text: '保存并继续新增',
@@ -216,7 +216,7 @@
 
                 var selectedRow = $RGrid.datagrid('getSelected');
                 if(!selectedRow){
-                    $.messager.alert("警告", "请选择要编辑的商品!", "warning");
+                    $.messager.alert("警告", "请选择要编辑的数据!", "warning");
                     return;
                 }
 
@@ -224,7 +224,7 @@
                     title: '编辑--工程',
                     width: 400,
                     height: 200,
-                    content: 'url:lease/project/'+selectedRow.id+'/edit',
+                    content: 'url:leasing/project/'+selectedRow.id+'/edit',
                     data: {datagrid: $RGrid, project: selectedRow},
                     buttons:[{
                         text: '保存',
@@ -251,14 +251,14 @@
 
                 var selectedRow = $LGrid.datagrid('getSelected');
                 if(!selectedRow){
-                    $.messager.alert("警告", "请选择要删除的商品分类!", "warning");
+                    $.messager.alert("警告", "请选择要删除数据!", "warning");
                     return;
                 }
 
-                $.messager.confirm('提示', '确认删除此条记录?', function(r){
+                $.messager.confirm('提示', '确认删除当前数据?', function(r){
                     if(r){
                         $.ajax({
-                            url: 'lease/holder/' + selectedRow.id + '/delete',
+                            url: 'leasing/holder/' + selectedRow.id + '/delete',
                             success: function(data){
                                 if(data.status == 200){
                                     $LGrid.datagrid('reload');
@@ -279,14 +279,14 @@
 
                 var selectedRow = $RGrid.datagrid('getSelected');
                 if(!selectedRow){
-                    $.messager.alert("警告", "请选择要删除的商品!", "warning");
+                    $.messager.alert("警告", "请选择要删除的数据!", "warning");
                     return;
                 }
 
-                $.messager.confirm('提示', '确认删除此条记录?', function(r){
+                $.messager.confirm('提示', '确认删除当前数据?', function(r){
                     if(r){
                         $.ajax({
-                            url: 'lease/project/' + selectedRow.id + '/delete',
+                            url: 'leasing/project/' + selectedRow.id + '/delete',
                             success: function(data){
                                 if(data.status == 200){
                                     $RGrid.datagrid('reload');

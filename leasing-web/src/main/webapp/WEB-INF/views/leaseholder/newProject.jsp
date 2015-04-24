@@ -58,7 +58,7 @@
 
     function saveData(win, callback){
         $('#newProjectForm').form('submit', {
-            url: 'lease/project/new',
+            url: 'leasing/project/new',
             onSubmit: function(){
                 var holderName = $('#holder').combobox('getText');
                 $('#holderName').val(holderName);
