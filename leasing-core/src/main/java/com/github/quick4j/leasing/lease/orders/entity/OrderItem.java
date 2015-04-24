@@ -22,6 +22,10 @@ public abstract class OrderItem extends AbstractEntity{
     private String goodsId;
 
     @NotEmpty
+    @Column(name = "goods_type", length = 32, nullable = false)
+    private String goodsType;
+
+    @NotEmpty
     @Column(name = "goods_name", length = 500)
     private String goodsName;
 
@@ -52,6 +56,14 @@ public abstract class OrderItem extends AbstractEntity{
 
     public void setGoodsId(String goodsId) {
         this.goodsId = goodsId;
+    }
+
+    public String getGoodsType() {
+        return goodsType;
+    }
+
+    public void setGoodsType(String goodsType) {
+        this.goodsType = goodsType;
     }
 
     public String getGoodsName() {

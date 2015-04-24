@@ -1,6 +1,6 @@
 {
     "name": "holders",
-    "entity": "com.github.quick4j.leasing.lease.leaseholder.entity.LeaseHoder",
+    "entity": "com.github.quick4j.leasing.leaseholder.entity.LeaseHoder",
     "columns": [
         [
             {

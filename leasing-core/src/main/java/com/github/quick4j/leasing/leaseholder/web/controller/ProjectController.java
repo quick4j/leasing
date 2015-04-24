@@ -1,9 +1,9 @@
-package com.github.quick4j.leasing.lease.leaseholder.web.controller;
+package com.github.quick4j.leasing.leaseholder.web.controller;
 
 import com.github.quick4j.core.service.Criteria;
 import com.github.quick4j.core.service.CrudService;
 import com.github.quick4j.core.web.http.AjaxResponse;
-import com.github.quick4j.leasing.lease.leaseholder.entity.LeaseHoder;
+import com.github.quick4j.leasing.leaseholder.entity.Project;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,24 +17,18 @@ import javax.validation.Valid;
  * @author zhaojh.
  */
 @Controller
-@RequestMapping("/holder")
-public class LeaseHolderController {
+@RequestMapping("/project")
+public class ProjectController {
     private final String LOCATION = "leaseholder/";
-
     @Resource
-    private CrudService<LeaseHoder> crudService;
-
-    @RequestMapping(method = RequestMethod.GET)
-    public String listing(){
-        return LOCATION + "index";
-    }
+    private CrudService<Project> crudService;
 
     @RequestMapping(
             value = "/new",
             method = RequestMethod.GET
     )
     public String doShowNewDialog(){
-        return LOCATION + "newHolder";
+        return LOCATION + "newProject";
     }
 
     @RequestMapping(
@@ -43,14 +37,14 @@ public class LeaseHolderController {
             produces = "application/json;charset=utf-8"
     )
     @ResponseBody
-    public AjaxResponse doCreate(@Valid LeaseHoder holder){
-        crudService.save(holder);
+    public AjaxResponse doCreate(@Valid Project project){
+        crudService.save(project);
         return new AjaxResponse(true);
     }
 
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
     public String doShowEditDialog(@PathVariable("id") String id){
-        return LOCATION + "editHolder";
+        return LOCATION + "editProject";
     }
 
     @RequestMapping(
@@ -59,8 +53,8 @@ public class LeaseHolderController {
             produces = "application/json;charset=utf-8"
     )
     @ResponseBody
-    public AjaxResponse doUpdate(@Valid LeaseHoder holder){
-        crudService.save(holder);
+    public AjaxResponse doUpdate(@Valid Project project){
+        crudService.save(project);
         return new AjaxResponse(true);
     }
 
@@ -71,7 +65,7 @@ public class LeaseHolderController {
     )
     @ResponseBody
     public AjaxResponse doDelete(@PathVariable("id") String id){
-        Criteria<LeaseHoder> criteria = crudService.createCriteria(LeaseHoder.class);
+        Criteria<Project> criteria = crudService.createCriteria(Project.class);
         criteria.delete(id);
         return new AjaxResponse(true);
     }

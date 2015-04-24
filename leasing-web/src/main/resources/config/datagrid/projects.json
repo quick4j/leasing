@@ -1,6 +1,6 @@
 {
     "name": "projects",
-    "entity": "com.github.quick4j.leasing.lease.leaseholder.entity.Project",
+    "entity": "com.github.quick4j.leasing.leaseholder.entity.Project",
     "columns": [
         [
             {
