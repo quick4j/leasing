@@ -11,17 +11,17 @@
     "children":[{
         "text":"承租单位维护",
         "attributes":{
-            "url":"lease/holder"
+            "url":"leasing/holder"
         }
     },{
-        "text":"租赁发料单",
+        "text":"发料单",
         "attributes":{
-            "url":"lease/orders/faliao/new"
+            "url":"leasing/orders/leaseorder/out"
         }
     },{
-        "text":"租赁收料单",
+        "text":"收料单",
         "attributes":{
-            "url":"lease/orders/shouliao/new"
+            "url":"leasing/orders/leaseorder/in"
         }
     }]
 },{
@@ -32,12 +32,12 @@
             "url":"lease/relet/leaser"
         }
     },{
-        "text":"租借发料单",
+        "text":"发料单",
         "attributes":{
             "url":"lease/relet/faliao/new"
         }
     },{
-        "text":"租借收料单",
+        "text":"收料单",
         "attributes":{
             "url":"lease/relet/shouliao/new"
         }
@@ -45,16 +45,6 @@
 },{
     "text": "统计查询",
     "children":[{
-        "text":"租赁发料单查询",
-        "attributes":{
-            "url":"lease/orders/faliao"
-        }
-    },{
-        "text":"租赁收料单查询",
-        "attributes":{
-            "url":"lease/orders/shouliao"
-        }
-    },{
         "text":"租借发料单查询",
         "attributes":{
             "url":"lease/relet/faliao"
