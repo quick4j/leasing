@@ -45,13 +45,14 @@
                     url: 'tree.json',
                     onClick: function(node){
                         var $tabs = $('#tbs');
-                        if($tabs.tabs('exists', node.text)){
-                            $tabs.tabs('select', node.text);
+                        var title = $(this).tree('getParent', node.target).text + '-' + node.text;
+                        if($tabs.tabs('exists', title)){
+                            $tabs.tabs('select', title);
                             return;
                         }
 
                         $tabs.tabs('add',{
-                            title: node.text,
+                            title: title,
                             useiframe: true,
                             closable: true,
                             content:'url:' + node.attributes.url
