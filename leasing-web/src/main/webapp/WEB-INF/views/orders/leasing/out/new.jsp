@@ -17,7 +17,7 @@
              style="overflow: hidden; height: 37px;">
             <div id="tb"></div>
         </div>
-        <div data-options="region:'center', border: false" style="padding: 10px 30px 60px 30px;">
+        <div data-options="region:'center', border: false" style="padding: 10px 30px 20px 30px;">
             <div class="easyui-layout" data-options="fit:true">
                 <div data-options="region:'north', split: false, border:false" style="height:150px;">
                     <div class="order-title">周转工具管理中心发料单</div>
@@ -257,7 +257,7 @@
                             width: 600,
                             height: 400,
                             data: {
-                                code: $hodlerPlugin.textbox('getText'),
+                                searchValue: $hodlerPlugin.textbox('getText'),
                                 callback: function(project){
                                     $hodlerPlugin.textbox('setValue', project.id)
                                             .textbox('setText', project.name + '(' + project.holderName + ')');
@@ -267,7 +267,7 @@
                                     $('#holderName').val(project.holderName);
                                 }
                             },
-                            content: 'url:lease/dialog/projects',
+                            content: 'url:leasing/orders/common/dialog/projects',
                             buttons:[{
                                 text: '确定',
                                 iconCls: 'icon-ok',
@@ -294,18 +294,20 @@
                         if($('#searchGoodsDialog').length > 0) return;
                         $.showModalDialog({
                             id: 'searchGoodsDialog',
-                            title: '选择-承建单位',
+                            title: '选择-料具',
                             width: 600,
                             height: 400,
                             data: {
-                                code: $(getCodeEditor()).textbox('textbox').val(),
-                                datagrid: $itemGrid,
-                                editingIndex: editingIndex,
-                                codeEditor: getCodeEditor(),
-                                goodsEditor: getGoodsEditor(),
-                                goodsSpecEditor: getGoodsSpecEditor()
+                                searchValue: $(getCodeEditor()).textbox('textbox').val(),
+                                callback: function(goods){
+                                    $itemGrid.datagrid('getEditingRow').goodsId = goods.id;
+                                    $itemGrid.datagrid('getEditingRow').goodsType = goods.type;
+                                    getCodeEditor().textbox('setValue', goods.code);
+                                    getGoodsEditor().textbox('setValue', goods.name);
+                                    getGoodsSpecEditor().textbox('setValue', goods.spec);
+                                }
                             },
-                            content: 'url:lease/dialog/goods',
+                            content: 'url:leasing/orders/common/dialog/goods',
                             buttons:[{
                                 text: '确定',
                                 iconCls: 'icon-ok',
@@ -521,11 +523,11 @@
 
                         $.ajax({
                             type: 'post',
-                            url: 'lease/orders/faliao/new',
+                            url: 'leasing/orders/leaseorder/out/new',
                             data: {leaseorder: $.toJSON(order)},
                             success: function(data){
                                 if(data.status == 200){
-                                    location.href = 'lease/orders/faliao/' + data.data.id;
+                                    location.href = 'leasing/orders/leaseorder/out/' + data.data.id;
                                 }else{
                                     $.messager.alert('错误','单据保存失败！' + '<br>' + data.message, 'error');
                                 }
@@ -539,7 +541,7 @@
 
 
                 return {
-                    init: function(){
+                    init: function(dialog){
                         $.extend($.fn.validatebox.defaults.rules, {
                             min:{
                                 validator: function(value, param){

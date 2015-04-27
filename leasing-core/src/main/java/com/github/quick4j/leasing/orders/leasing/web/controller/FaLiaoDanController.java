@@ -1,12 +1,12 @@
-package com.github.quick4j.leasing.lease.orders.web.controller;
+package com.github.quick4j.leasing.orders.leasing.web.controller;
 
 import com.github.quick4j.core.service.Criteria;
 import com.github.quick4j.core.service.CrudService;
 import com.github.quick4j.core.util.JsonUtils;
 import com.github.quick4j.core.web.http.AjaxResponse;
-import com.github.quick4j.leasing.lease.orders.OrderType;
-import com.github.quick4j.leasing.lease.orders.entity.LeaseOrder;
-import com.github.quick4j.leasing.lease.orders.entity.LeaseOrderItem;
+import com.github.quick4j.leasing.orders.entity.OrderType;
+import com.github.quick4j.leasing.orders.leasing.entity.LeaseOrder;
+import com.github.quick4j.leasing.orders.leasing.entity.LeaseOrderItem;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,11 +24,11 @@ import java.util.Map;
  * @author zhaojh.
  */
 @Controller
-@RequestMapping("/orders/faliao")
+@RequestMapping("/orders/leaseorder/out")
 public class FaLiaoDanController {
     private final Logger logger = LoggerFactory.getLogger(FaLiaoDanController.class);
 
-    private final String LOCATION = "orders/faliao/";
+    private final String LOCATION = "orders/leasing/out/";
     @Resource
     private CrudService<LeaseOrder> crudService;
 

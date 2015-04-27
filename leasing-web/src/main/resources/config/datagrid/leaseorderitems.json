@@ -1,6 +1,6 @@
 {
     "name": "leaseorderitems",
-    "entity": "com.github.quick4j.leasing.lease.orders.entity.LeaseOrderItem",
+    "entity": "com.github.quick4j.leasing.orders.leasing.entity.LeaseOrderItem",
     "columns": [
         [
             {

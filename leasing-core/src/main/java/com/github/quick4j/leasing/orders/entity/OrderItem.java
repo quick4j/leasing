@@ -1,4 +1,4 @@
-package com.github.quick4j.leasing.lease.orders.entity;
+package com.github.quick4j.leasing.orders.entity;
 
 import com.github.quick4j.core.entity.AbstractEntity;
 import org.hibernate.validator.constraints.NotEmpty;

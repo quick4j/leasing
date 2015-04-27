@@ -10,8 +10,8 @@
         <link rel="stylesheet" href="static/js/vender/easyui/themes/icon.css">
     </head>
     <body class="easyui-layout">
-        <div data-options="region:'center', border: false" style="padding-top: 3px;">
-            <div data-options="region: 'north', border: true"
+        <div data-options="region:'center', border: false">
+            <div data-options="region: 'north'"
                  style="overflow: hidden; height: 38px;">
                 <div id="tb"></div>
             </div>
@@ -88,18 +88,11 @@
             function initToolbar(){
                 $('#tb').toolbar({
                     data:[{
-                        id: 'tbBtnNew',
-                        text: '新建',
-                        iconCls: 'icon-add',
-                        handler: function(){
-                            location.href = 'lease/orders/faliao/new';
-                        }
-                    },{
                         id: 'tbBtnSave',
                         text: '保存',
                         iconCls: 'icon-save',
                         handler: doSubmit
-                    },{
+                    },'-',{
                         id: 'tbBtnPrint',
                         text: '打印',
                         iconCls: 'icon-print',
@@ -128,9 +121,11 @@
             }
 
             function initOpenTimePlugin(){
+                var opentime = quick4j.util.dateFormate.format(${order.openTime}, 'YYYY-MM-DD');
                 $('#openTime').datebox({
                     editable: false,
                     required:true,
+                    value: opentime,
                     parser: function(s){
                         var t = Date.parse(s);
                         if(!isNaN(t)){
@@ -160,7 +155,7 @@
                             $('#holderName').val(project.holderName);
                         }
                     },
-                    content: 'url:lease/dialog/projects',
+                    content: 'url:leasing/orders/common/dialog/projects',
                     buttons:[{
                         text: '确定',
                         iconCls: 'icon-ok',
@@ -205,11 +200,11 @@
 
                 $.ajax({
                     type: 'post',
-                    url: 'lease/orders/faliao/' + order.id + '/edit',
+                    url: 'leasing/orders/leaseorder/out/' + order.id + '/edit',
                     data: {leaseorder: $.toJSON(order)},
                     success: function(result){
                         if(result.status == 200){
-                            location.href = 'lease/orders/faliao/' + order.id;
+                            location.href = 'leasing/orders/leaseorder/out/' + order.id;
                         }else{
                             $.messager.alert('错误','单据保存失败！' + '<br>' + result.message, 'error');
                         }

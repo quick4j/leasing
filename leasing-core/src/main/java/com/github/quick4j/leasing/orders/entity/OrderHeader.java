@@ -1,8 +1,7 @@
-package com.github.quick4j.leasing.lease.orders.entity;
+package com.github.quick4j.leasing.orders.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.github.quick4j.core.entity.AbstractEntity;
-import com.github.quick4j.leasing.lease.orders.OrderType;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;

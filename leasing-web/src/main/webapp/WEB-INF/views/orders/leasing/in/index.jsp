@@ -130,11 +130,49 @@
             function initTopToolbar(){
                 $('#topToolbar').toolbar({
                     data:[{
+                        id: 'tbBtnNew',
+                        text: '新建',
+                        iconCls: 'icon-add',
+                        handler: doNewDialog
+                    },'-',{
+                        id: 'tbBtnEdit',
+                        text: '编辑',
+                        iconCls: 'icon-edit',
+                        handler: doEditDialog
+                    },'-',{
                         id: 'tbBtnDelete',
                         text: '删除',
                         iconCls: 'icon-remove',
                         handler: doDelete
                     }]
+                });
+            }
+
+            function doNewDialog(){
+                $.showModalDialog({
+                    title: '新建--发料单',
+                    content: 'url:leasing/orders/leaseorder/in/new',
+                    useiframe: true,
+                    height: '90%',
+                    width: '90%'
+                });
+            }
+
+            function doEditDialog(){
+                var $LGrid = $('#orders');
+
+                var selected = $LGrid.datagrid('getSelected');
+                if(!selected){
+                    $.messager.alert("警告", "请选择要编辑的数据!", "warning");
+                    return;
+                }
+
+                $.showModalDialog({
+                    title: '新建--发料单',
+                    content: 'url:leasing/orders/leaseorder/in/' + selected.id + '/edit',
+                    useiframe: true,
+                    height: '90%',
+                    width: '90%'
                 });
             }
 
@@ -150,7 +188,7 @@
                 $.messager.confirm('提示', '确认删除此条记录?', function(r){
                     if(r){
                         $.ajax({
-                            url: 'lease/orders/faliao/' + selectedRow.id + '/delete',
+                            url: 'leasing/orders/leaseorder/in/' + selectedRow.id + '/delete',
                             success: function(data){
                                 if(data.status == 200){
                                     $LGrid.datagrid('reload');

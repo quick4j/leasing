@@ -11,12 +11,12 @@
     </head>
     <body class="easyui-layout">
         <!-- toolbar -->
-        <div data-options="region: 'north', border: true, minHeight: 35, maxHeight:35"
-             style="overflow: hidden; height: 35px;">
+        <div data-options="region: 'north', border: true"
+             style="overflow: hidden; height: 38px;">
             <div id="topToolbar"></div>
         </div>
         <!-- 单据明细 -->
-        <div data-options="region:'south', border:true, split:true" style="height: 50%;">
+        <div data-options="region:'south', split:true" style="height: 50%;">
             <div class="easyui-layout" data-options="fit:true">
                 <div data-options="region: 'north'"
                      style="overflow: hidden; height: 38px;">
@@ -121,6 +121,16 @@
             function initTopToolbar(){
                 $('#topToolbar').toolbar({
                     data:[{
+                        id: 'tbBtnNew',
+                        text: '新建',
+                        iconCls: 'icon-add',
+                        handler: doNewDialog
+                    },'-',{
+                        id: 'tbBtnEdit',
+                        text: '编辑',
+                        iconCls: 'icon-edit',
+                        handler: doEditDialog
+                    },'-',{
                         id: 'tbBtnDelete',
                         text: '删除',
                         iconCls: 'icon-remove',
@@ -140,6 +150,34 @@
                 });
             }
 
+            function doNewDialog(){
+                $.showModalDialog({
+                    title: '新建--发料单',
+                    content: 'url:leasing/orders/leaseorder/out/new',
+                    useiframe: true,
+                    height: '90%',
+                    width: '90%'
+                });
+            }
+
+            function doEditDialog(){
+                var $LGrid = $('#orders');
+
+                var selected = $LGrid.datagrid('getSelected');
+                if(!selected){
+                    $.messager.alert("警告", "请选择要编辑的数据!", "warning");
+                    return;
+                }
+
+                $.showModalDialog({
+                    title: '新建--发料单',
+                    content: 'url:leasing/orders/leaseorder/out/' + selected.id + '/edit',
+                    useiframe: true,
+                    height: '90%',
+                    width: '90%'
+                });
+            }
+
             function doDelete(){
                 var $LGrid = $('#orders');
 
@@ -152,7 +190,7 @@
                 $.messager.confirm('提示', '确认删除此条记录?', function(r){
                     if(r){
                         $.ajax({
-                            url: 'lease/orders/faliao/' + selectedRow.id + '/delete',
+                            url: 'leasing/orders/leaseorder/out/' + selectedRow.id + '/delete',
                             success: function(data){
                                 if(data.status == 200){
                                     $LGrid.datagrid('reload');

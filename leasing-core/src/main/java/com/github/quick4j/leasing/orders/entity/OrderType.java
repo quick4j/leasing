@@ -1,4 +1,4 @@
-package com.github.quick4j.leasing.lease.orders;
+package com.github.quick4j.leasing.orders.entity;
 
 /**
  * @author zhaojh.

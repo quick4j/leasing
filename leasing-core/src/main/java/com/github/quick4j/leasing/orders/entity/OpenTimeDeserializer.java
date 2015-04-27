@@ -1,4 +1,4 @@
-package com.github.quick4j.leasing.lease.orders.entity;
+package com.github.quick4j.leasing.orders.entity;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
