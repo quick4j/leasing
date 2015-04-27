@@ -1,4 +1,4 @@
-package com.github.quick4j.leasing.lease.dialog.web.controller;
+package com.github.quick4j.leasing.orders.dialog.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author zhaojh.
  */
 @Controller
-@RequestMapping("/dialog")
+@RequestMapping("/orders/common/dialog")
 public class SelectDialogController {
-    private final String LOCATION = "dialog/";
+    private final String LOCATION = "orders/dialog/";
 
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
     public String doShowSelectProjectDialog(){

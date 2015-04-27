@@ -5,23 +5,25 @@
     </div>
     <div data-options="region:'south', border: false" style="height:40px;">
         <div style="margin-top: 5px; margin-left: 10px;">
-            助记码：<input id="searchTextBox" data-options="width: 300, height: 28">
+            料具助记码：<input id="searchTextBox" data-options="width: 300, height: 28">
         </div>
     </div>
 </div>
 <script>
     function doInit(dialog){
-        initSearchBoxPlugin(dialog);
-        initGridPlugin();
+        initSearchTextBox(dialog);
+        initGrid();
     }
 
-    function initGridPlugin(){
+    function initGrid(){
         $('#dg').datagrid({
             columns:[[
                 {field: 'code', title: '助记码', width: 150},
-                {field: 'name', title: '名称', width: 150}
+                {field: 'name', title: '品名', width: 150},
+                {field: 'spec', title: '规格', width: 150},
+                {field: 'unit', title: '计量单位', width: 100}
             ]],
-            url: 'api/rest/datagrid/leasers',
+            url: 'api/rest/datagrid/goods',
             fit: true,
             striped: true,
             singleSelect: true,
@@ -37,15 +39,22 @@
             onBeforeLoad: function(param){
                 return param._loading;
             }
-        });
+        }).datagrid('addEventListener', [{
+            name: 'onLoadSuccess',
+            handler: function(data){
+                if(data.rows.length){
+                    $(this).datagrid('selectRow',0);
+                }
+            }
+        }]);
     }
 
-    function initSearchBoxPlugin(dialog){
-        var searchCode = dialog.getData('code');
+    function initSearchTextBox(dialog){
+        var searchValue = dialog.getData('searchValue');
         $('#searchTextBox').textbox({
             width: 300,
             height: 28,
-            value: searchCode
+            value: searchValue
         }).textbox('textbox')
                 .focus()
                 .bind('keypress', function(event){
@@ -72,7 +81,6 @@
         if(selected){
             dialog.getData('callback')(selected);
         }
-
         dialog.close();
     }
 </script>
