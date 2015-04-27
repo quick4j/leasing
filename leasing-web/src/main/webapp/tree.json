@@ -29,7 +29,7 @@
     "children":[{
         "text":"租借单位维护",
         "attributes":{
-            "url":"lease/relet/leaser"
+            "url":"leasing/leaser"
         }
     },{
         "text":"发料单",

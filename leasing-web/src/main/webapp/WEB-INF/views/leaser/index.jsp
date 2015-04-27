@@ -65,7 +65,7 @@
                     title: '新建',
                     width: 400,
                     height: 150,
-                    content: 'url:lease/relet/leaser/new',
+                    content: 'url:leasing/leaser/new',
                     data: {datagrid: $MGrid},
                     buttons:[{
                         text: '保存并继续新增',
@@ -105,7 +105,7 @@
                     title: '编辑',
                     width: 400,
                     height: 150,
-                    content: 'url:lease/relet/leaser/'+selectedRow.id+'/edit',
+                    content: 'url:leasing/leaser/'+selectedRow.id+'/edit',
                     data: {datagrid: $MGrid, leaser: selectedRow},
                     buttons:[{
                         text: '保存',
@@ -139,7 +139,7 @@
                 $.messager.confirm('提示', '确认删除此条记录?', function(r){
                     if(r){
                         $.ajax({
-                            url: 'lease/relet/leaser/' + selectedRow.id + '/delete',
+                            url: 'leasing/leaser/' + selectedRow.id + '/delete',
                             success: function(data){
                                 if(data.status == 200){
                                     $MGrid.datagrid('reload');

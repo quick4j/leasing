@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div style="padding: 5px;">
-    <form method="post" id="editLeaserForm">
-        <input type="hidden" id="leaserId" name="id">
+    <form method="post" id="newLeaserForm">
         <div class="form-group">
             <label class="control-label required" for="leaserCode">助记码</label>
             <div class="form-field">
@@ -22,14 +21,7 @@
 </div>
 <script>
     function doInitData(win){
-        var leaser = win.getData('leaser');
-        $('#leaserId').val(leaser.id);
-        $('#leaserCode')
-                .textbox('setValue', leaser.code)
-                .textbox('textbox')
-                .focus();
-        $('#leaserName').textbox('setValue', leaser.name);
-
+        $('#leaserCode').textbox('textbox').focus();
     }
 
     function doSave(win){
@@ -38,19 +30,26 @@
         });
     }
 
+    function doSaveAndNew(win){
+        saveData(win, function(){
+            $('#newLeaserForm').form('clear');
+            setTimeout(function(){
+                $('#leaserCode').textbox('textbox').focus();
+            },20);
+        });
+    }
+
     function saveData(win, callback){
-        var leaserid = $('#leaserId').val();
-        $('#editLeaserForm').form('submit', {
-            url: 'lease/relet/leaser/' + leaserid + '/edit',
+        $('#newLeaserForm').form('submit', {
+            url: 'leasing/leaser/new',
             onSubmit: function(){
                 return true;
             },
             success: function(data){
                 var result = eval('(' + data + ')');
                 if(result.status == 200){
-                    $.messager.alert('提示', '数据保存成功！');
                     win.getData('datagrid').datagrid('reload');
-                    callback();
+                    $.messager.alert('提示', '数据保存成功！','info', callback);
                 }else{
                     $.messager.alert('错误', '数据保存失败！' + result.message, 'error');
                 }

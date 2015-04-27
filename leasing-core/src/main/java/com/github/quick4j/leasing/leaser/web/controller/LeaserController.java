@@ -1,9 +1,9 @@
-package com.github.quick4j.leasing.lease.relet.web.controller;
+package com.github.quick4j.leasing.leaser.web.controller;
 
 import com.github.quick4j.core.service.Criteria;
 import com.github.quick4j.core.service.CrudService;
 import com.github.quick4j.core.web.http.AjaxResponse;
-import com.github.quick4j.leasing.lease.relet.entity.Leaser;
+import com.github.quick4j.leasing.leaser.entity.Leaser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -19,10 +19,10 @@ import javax.validation.Valid;
  * @author zhaojh.
  */
 @Controller
-@RequestMapping("/relet/leaser")
+@RequestMapping("/leaser")
 public class LeaserController {
     private static final Logger logger = LoggerFactory.getLogger(LeaserController.class);
-    private final String LOCATION = "relet/leaser/";
+    private final String LOCATION = "leaser/";
     @Resource
     private CrudService<Leaser> crudService;
 
