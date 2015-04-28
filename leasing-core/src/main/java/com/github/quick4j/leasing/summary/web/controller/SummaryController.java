@@ -4,6 +4,7 @@ import com.github.quick4j.core.service.Criteria;
 import com.github.quick4j.core.service.CrudService;
 import com.github.quick4j.core.web.http.AjaxResponse;
 import com.github.quick4j.leasing.summary.entity.SummaryResult;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -51,7 +52,9 @@ public class SummaryController {
 
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("holderId", holderid);
-        parameters.put("projectIds", Arrays.asList(projectids.split(",")));
+        if(StringUtils.isNotBlank(projectids)){
+            parameters.put("projectIds", Arrays.asList(projectids.split(",")));
+        }
 
         Criteria<SummaryResult> criteria = crudService.createCriteria(SummaryResult.class);
         List<SummaryResult> list = criteria.findAll("generalSummary", parameters);
