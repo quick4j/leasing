@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.github.quick4j.leasing.lease.summary.entity.SummaryResultMapper">
-    <resultMap id="summaryResult" type="com.github.quick4j.leasing.lease.summary.entity.SummaryResult">
+<mapper namespace="com.github.quick4j.leasing.summary.entity.SummaryResultMapper">
+    <resultMap id="summaryResult" type="com.github.quick4j.leasing.summary.entity.SummaryResult">
         <result property="goodsName" column="goods_name"/>
         <result property="goodsSpec" column="goods_spec"/>
         <result property="packages" column="packages"/>
@@ -11,7 +11,7 @@
     </resultMap>
 
     <sql id="subSelectLeaseOrder">
-        select holder_id, project_id, goods_id, goods_name, goods_spec,
+        select holder_id, project_id, goods_id, goods_name, goods_spec, goods_type,
           case when order_type='out' then -1*packages else packages end as packages,
           case when order_type='out' then -1*numbers else numbers end as numbers
         from lease_orders
@@ -27,7 +27,7 @@
     </sql>
 
     <sql id="subSelectReletOrder">
-        select leaser_id, leaser_name, order_type, goods_id, goods_name, goods_spec,
+        select leaser_id, leaser_name, order_type, goods_id, goods_name, goods_spec, goods_type,
         case when order_type='out' then -1*packages else packages end as packages,
         case when order_type='out' then -1*numbers else numbers end as numbers
         from lease_relet_orders
@@ -40,14 +40,14 @@
     </sql>
 
     <select id="generalSummary" resultMap="summaryResult" parameterType="map">
-        select t.goods_name, t.goods_spec, sum(t.packages) as packages, sum(t.numbers) as numbers
+        select t.goods_type, t.goods_name, t.goods_spec, sum(t.packages) as packages, sum(t.numbers) as numbers
         from (<include refid="subSelectLeaseOrder"/>) t
         group by goods_id
         order by goods_name, goods_spec
     </select>
 
     <select id="generalReletSummary" resultMap="summaryResult" parameterType="map">
-        select t.goods_name, t.goods_spec, sum(t.packages) as packages, sum(t.numbers) as numbers
+        select t.goods_type, t.goods_name, t.goods_spec, sum(t.packages) as packages, sum(t.numbers) as numbers
         from (<include refid="subSelectReletOrder"/>) t
         group by goods_id
         order by goods_name, goods_spec
