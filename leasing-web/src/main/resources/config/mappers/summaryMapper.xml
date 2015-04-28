@@ -18,11 +18,13 @@
         from lease_orders
         join lease_order_items on lease_order_items.order_id = lease_orders.id
         <where>
-            <if test="holderId != null">
-                holder_id = #{holderId}
+            <if test="projectIds != null">
+                <foreach collection="projectIds" item="projectid" index="index" open="(" separator="or" close=")" >
+                    project_id = #{projectid}
+                </foreach>
             </if>
-            <if test="projectId != null">
-                and project_id = #{projectId}
+            <if test="holderId != null">
+                and holder_id = #{holderId}
             </if>
         </where>
     </sql>

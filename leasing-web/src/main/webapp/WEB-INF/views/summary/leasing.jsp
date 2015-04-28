@@ -211,7 +211,7 @@
 
             function doSummary(){
                 var selectedHolder = $('#holdersGrid').datagrid('getSelected');
-                var selectedProject = $('#projectsGrid').datagrid('getSelected');
+                var selectedProjects = $('#projectsGrid').datagrid('getSelections');
                 var params = {};
                 if(selectedHolder){
                     $.extend(params, {holderid: selectedHolder.id});
@@ -220,8 +220,12 @@
                     return;
                 }
 
-                if(selectedProject){
-                    $.extend(params, {projectid: selectedProject.id});
+                if(selectedProjects && selectedProjects.length){
+                    var projectids = [];
+                    $.each(selectedProjects, function(i, project){
+                        projectids.push(project.id);
+                    });
+                    $.extend(params, {projectids: projectids.join(',')});
                 }
 
                 $('#summaryGrid').datagrid('load',params);

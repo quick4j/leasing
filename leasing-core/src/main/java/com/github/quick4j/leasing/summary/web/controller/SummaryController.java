@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,14 +44,14 @@ public class SummaryController {
     )
     @ResponseBody
     public AjaxResponse queryLeasing(@RequestParam(required = false) String holderid,
-                                     @RequestParam(required = false) String projectid){
+                                     @RequestParam(required = false) String projectids){
         logger.info("===> queryLeasing.");
         logger.info("===> holderid:" + holderid);
-        logger.info("===> projectid:" + projectid);
+        logger.info("===> projectid:" + projectids);
 
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("holderId", holderid);
-        parameters.put("projectId", projectid);
+        parameters.put("projectIds", Arrays.asList(projectids.split(",")));
 
         Criteria<SummaryResult> criteria = crudService.createCriteria(SummaryResult.class);
         List<SummaryResult> list = criteria.findAll("generalSummary", parameters);
