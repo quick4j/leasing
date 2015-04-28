@@ -3,7 +3,7 @@
     "children":[{
         "text":"料具维护",
         "attributes":{
-            "url":"basic/goods"
+            "url":"leasing/basic/goods"
         }
     }]
 },{
@@ -34,35 +34,25 @@
     },{
         "text":"发料单",
         "attributes":{
-            "url":"lease/relet/faliao/new"
+            "url":"leasing/orders/relet/out"
         }
     },{
         "text":"收料单",
         "attributes":{
-            "url":"lease/relet/shouliao/new"
+            "url":"leasing/orders/relet/in"
         }
     }]
 },{
     "text": "统计查询",
     "children":[{
-        "text":"租借发料单查询",
-        "attributes":{
-            "url":"lease/relet/faliao"
-        }
-    },{
-        "text":"租借收料单查询",
-        "attributes":{
-            "url":"lease/relet/shouliao"
-        }
-    },{
         "text":"租赁汇总",
         "attributes":{
-            "url":"lease/summary/leasing"
+            "url":"leasing/summary/leasing"
         }
     },{
         "text":"租借汇总",
         "attributes":{
-            "url":"lease/summary/relet"
+            "url":"leasing/summary/relet"
         }
     }]
 }]
