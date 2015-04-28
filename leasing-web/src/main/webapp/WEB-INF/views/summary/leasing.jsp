@@ -76,10 +76,10 @@
                     singleSelect: true,
                     title:'料具汇总',
                     columns: [[
-                        {field: 'goodsName', title: '品名', width: 200},
-                        {field: 'goodsSpec', title: '规格', width: 150},
-                        {field: 'packages', title: '在用量', width: 150},
-                        {field: 'numbers', title: '米数', width: 200}
+                        {field: 'goodsName', title: '品名', width: 150},
+                        {field: 'goodsSpec', title: '规格', width: 100},
+                        {field: 'packages', title: '在用量', width: 100},
+                        {field: 'numbers', title: '米数', width: 100}
                     ]],
                     toolbar:[{
                         iconCls: 'icon-search',
@@ -91,7 +91,7 @@
                     url: 'leasing/summary/leasing',
                     queryParams: {_loading: false},
                     rowStyler: function(index,row){
-                        if(row.goodsName == '合计'){
+                        if(row.goodsSpec == '合计'){
                             return 'background-color:#6293BB;color:#fff;font-weight: bold;';
                         }
                     },
@@ -111,8 +111,8 @@
 
                                         if(data.rows[i+1] && data.rows[i].goodsType != data.rows[i+1].goodsType){
                                             tmp.push({
-                                                goodsName: '合计',
-                                                goodsSpec: '',
+                                                goodsName: '',
+                                                goodsSpec: '合计',
                                                 packages: total1,
                                                 numbers: total2
                                             });
@@ -122,8 +122,8 @@
 
                                         if(i == length-1){
                                             tmp.push({
-                                                goodsName: '合计',
-                                                goodsSpec: '',
+                                                goodsName: '',
+                                                goodsSpec: '合计',
                                                 packages: total1,
                                                 numbers: total2
                                             });
