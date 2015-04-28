@@ -153,7 +153,8 @@
                     content: 'url:leasing/orders/relet/in/new',
                     useiframe: true,
                     height: '90%',
-                    width: '90%'
+                    width: '90%',
+                    locate: 'document'
                 });
             }
 
@@ -171,7 +172,8 @@
                     content: 'url:leasing/orders/relet/in/' + selected.id + '/edit',
                     useiframe: true,
                     height: '90%',
-                    width: '90%'
+                    width: '90%',
+                    locate: 'document'
                 });
             }
 

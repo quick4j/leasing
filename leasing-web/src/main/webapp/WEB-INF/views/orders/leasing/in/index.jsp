@@ -154,7 +154,8 @@
                     content: 'url:leasing/orders/leaseorder/in/new',
                     useiframe: true,
                     height: '90%',
-                    width: '90%'
+                    width: '90%',
+                    locate: 'document'
                 });
             }
 
@@ -172,7 +173,8 @@
                     content: 'url:leasing/orders/leaseorder/in/' + selected.id + '/edit',
                     useiframe: true,
                     height: '90%',
-                    width: '90%'
+                    width: '90%',
+                    locate: 'document'
                 });
             }
 
