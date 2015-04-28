@@ -1,6 +1,6 @@
 {
     "name": "reletorderitems",
-    "entity": "com.github.quick4j.leasing.lease.relet.entity.ReletOrderItem",
+    "entity": "com.github.quick4j.leasing.orders.relet.entity.ReletOrderItem",
     "columns": [
         [
             {

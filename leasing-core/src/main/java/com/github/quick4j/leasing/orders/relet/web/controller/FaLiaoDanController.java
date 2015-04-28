@@ -1,12 +1,12 @@
-package com.github.quick4j.leasing.lease.relet.web.controller;
+package com.github.quick4j.leasing.orders.relet.web.controller;
 
 import com.github.quick4j.core.service.Criteria;
 import com.github.quick4j.core.service.CrudService;
 import com.github.quick4j.core.util.JsonUtils;
 import com.github.quick4j.core.web.http.AjaxResponse;
-import com.github.quick4j.leasing.lease.orders.OrderType;
-import com.github.quick4j.leasing.lease.relet.entity.ReletOrder;
-import com.github.quick4j.leasing.lease.relet.entity.ReletOrderItem;
+import com.github.quick4j.leasing.orders.entity.OrderType;
+import com.github.quick4j.leasing.orders.relet.entity.ReletOrder;
+import com.github.quick4j.leasing.orders.relet.entity.ReletOrderItem;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,10 +23,10 @@ import java.util.Map;
  * @author zhaojh.
  */
 @Controller(value = "ReletFaLiaoDanController")
-@RequestMapping("/relet/faliao")
+@RequestMapping("/orders/relet/out")
 public class FaLiaoDanController {
     private static final Logger logger = LoggerFactory.getLogger(FaLiaoDanController.class);
-    private final String LOCATION = "relet/faliao/";
+    private final String LOCATION = "orders/relet/out/";
 
     @Resource
     private CrudService<ReletOrder> crudService;

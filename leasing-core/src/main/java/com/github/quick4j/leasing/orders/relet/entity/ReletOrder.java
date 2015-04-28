@@ -1,8 +1,8 @@
-package com.github.quick4j.leasing.lease.relet.entity;
+package com.github.quick4j.leasing.orders.relet.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.quick4j.core.entity.Entity;
-import com.github.quick4j.leasing.lease.orders.entity.OrderHeader;
+import com.github.quick4j.leasing.orders.entity.OrderHeader;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

@@ -279,7 +279,7 @@
                             width: 600,
                             height: 400,
                             data: {
-                                code: $hodlerPlugin.textbox('getText'),
+                                searchValue: $hodlerPlugin.textbox('getText'),
                                 callback: function(project){
                                     $hodlerPlugin.textbox('setValue', project.id)
                                             .textbox('setText', project.name + '(' + project.holderName + ')');
@@ -289,7 +289,7 @@
                                     $('#holderName').val(project.holderName);
                                 }
                             },
-                            content: 'url:lease/dialog/projects',
+                            content: 'url:leasing/orders/common/dialog/projects',
                             buttons:[{
                                 text: '确定',
                                 iconCls: 'icon-ok',
@@ -320,13 +320,13 @@
                             width: 600,
                             height: 400,
                             data: {
-                                code: $leaserPlugin.textbox('getText'),
+                                searchValue: $leaserPlugin.textbox('getText'),
                                 callback: function(leaser){
                                     $leaserPlugin.textbox('setValue', leaser.id)
                                             .textbox('setText', leaser.name);
                                 }
                             },
-                            content: 'url:lease/dialog/leasers',
+                            content: 'url:leasing/orders/common/dialog/leasers',
                             buttons:[{
                                 text: '确定',
                                 iconCls: 'icon-ok',
@@ -353,14 +353,16 @@
                             width: 600,
                             height: 400,
                             data: {
-                                code: $(getCodeEditor()).textbox('textbox').val(),
-                                datagrid: $itemGrid,
-                                editingIndex: editingIndex,
-                                codeEditor: getCodeEditor(),
-                                goodsEditor: getGoodsEditor(),
-                                goodsSpecEditor: getGoodsSpecEditor()
+                                searchValue: $(getCodeEditor()).textbox('textbox').val(),
+                                callback: function(goods){
+                                    $itemGrid.datagrid('getEditingRow').goodsId = goods.id;
+                                    $itemGrid.datagrid('getEditingRow').goodsType = goods.type;
+                                    getCodeEditor().textbox('setValue', goods.code);
+                                    getGoodsEditor().textbox('setValue', goods.name);
+                                    getGoodsSpecEditor().textbox('setValue', goods.spec);
+                                }
                             },
-                            content: 'url:lease/dialog/goods',
+                            content: 'url:leasing/orders/common/dialog/goods',
                             buttons:[{
                                 text: '确定',
                                 iconCls: 'icon-ok',
@@ -586,14 +588,11 @@
 
                         $.ajax({
                             type: 'post',
-                            url: 'lease/relet/shouliao/new',
+                            url: 'leasing/orders/relet/in/new',
                             data: {order: $.toJSON(order)},
                             success: function(data){
                                 if(data.status == 200){
-//                                    $.messager.alert('提示','单据保存成功！');
-//                                    $('#tbBtnSave').linkbutton('disable');
-//                                    $('#tbBtnPrint').linkbutton('enable');
-                                    location.href = 'lease/relet/shouliao/'+data.data.id;
+                                    location.href = 'leasing/orders/relet/in/'+data.data.id;
                                 }else{
                                     $.messager.alert('错误','单据保存失败！' + '<br>' + data.message, 'error');
                                     $('#tbBtnSave').linkbutton('enable');

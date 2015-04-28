@@ -1,6 +1,6 @@
 {
     "name": "leasers",
-    "entity": "com.github.quick4j.leasing.lease.relet.entity.Leaser",
+    "entity": "com.github.quick4j.leasing.leaser.entity.Leaser",
     "columns": [
         [
             {

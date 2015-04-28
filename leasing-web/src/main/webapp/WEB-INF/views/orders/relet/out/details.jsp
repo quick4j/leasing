@@ -17,8 +17,8 @@
             </div>
             <div data-options="region:'center', border: false" style="padding-top: 3px;">
                 <div style="height:280px;width:800px;left:10%;position:relative;">
-                    <div style="">
-                        周转工具管理中心收料单
+                    <div style="text-align: center;height: 40px;font-size: 20px; padding-top: 5px; letter-spacing: 8px;">
+                        周转工具管理中心租借发料单
                     </div>
                     <div>
                         <table style="width: 100%">
@@ -60,23 +60,13 @@
         <script>
             $(function(){
                 initToolbar();
+
+                var opentime = quick4j.util.dateFormate.format(${order.openTime}, 'YYYY-MM-DD');
+                $('#opentime').text(opentime);
             });
             function initToolbar(){
                 $('#tb').toolbar({
                     data:[{
-                        id: 'tbBtnNew',
-                        text: '新建',
-                        iconCls: 'icon-add',
-                        handler: function(){
-                            location.href = 'lease/orders/shouliao/new';
-                        }
-                    },{
-                        id: 'tbBtnSave',
-                        text: '保存',
-                        iconCls: 'icon-save',
-                        disabled: true,
-                        handler: function(){}
-                    },{
                         id: 'tbBtnPrint',
                         text: '打印',
                         iconCls: 'icon-print',
