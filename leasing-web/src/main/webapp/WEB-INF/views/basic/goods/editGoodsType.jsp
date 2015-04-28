@@ -36,7 +36,7 @@
 
     function saveData(win, callback){
         $('#newGoodsTypeForm').form('submit', {
-            url: 'basic/goods/type/edit',
+            url: 'leasing/basic/goods/type/edit',
             onSubmit: function(){
                 return $(this).form('validate');
             },

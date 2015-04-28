@@ -17,9 +17,9 @@ import javax.validation.Valid;
  * @author zhaojh.
  */
 @Controller
-@RequestMapping("/goods/type")
+@RequestMapping("/basic/goods/type")
 public class GoodsTypeController {
-    private final String LOCATION = "goods/";
+    private final String LOCATION = "basic/goods/";
     @Resource
     private CrudService<GoodsType> crudService;
 

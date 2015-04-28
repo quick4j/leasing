@@ -20,6 +20,7 @@
                    name: 'goodsType',
                    fit: true,
                    striped: true,
+                   sortName: 'code',
                    singleSelect:true,
                    onLoadSuccess: callbackForLeftGrid"></table>
         </div>
@@ -113,7 +114,7 @@
                     title: '新建',
                     width: 400,
                     height: 150,
-                    content: 'url:basic/goods/type/new',
+                    content: 'url:leasing/basic/goods/type/new',
                     data: {datagrid: $LGrid},
                     buttons:[{
                         text: '保存并继续新增',
@@ -153,7 +154,7 @@
                     title: '编辑',
                     width: 400,
                     height: 150,
-                    content: 'url:basic/goods/type/edit',
+                    content: 'url:leasing/basic/goods/type/edit',
                     data: {datagrid: $LGrid, goodsType: selectedRow},
                     buttons:[{
                         text: '保存',
@@ -184,7 +185,7 @@
                     title: '新建',
                     width: 400,
                     height: 300,
-                    content: 'url:basic/goods/new',
+                    content: 'url:leasing/basic/goods/new',
                     data: {datagrid: $RGrid, goodsType: goodsType},
                     buttons:[{
                         text: '保存并继续新增',
@@ -224,7 +225,7 @@
                     title: '编辑',
                     width: 400,
                     height: 300,
-                    content: 'url:basic/goods/edit',
+                    content: 'url:leasing/basic/goods/edit',
                     data: {datagrid: $RGrid, goods: selectedRow},
                     buttons:[{
                         text: '保存',
@@ -258,7 +259,7 @@
                 $.messager.confirm('提示', '确认删除此条记录?', function(r){
                     if(r){
                         $.ajax({
-                            url: 'basic/goods/type/' + selectedRow.id + '/delete',
+                            url: 'leasing/basic/goods/type/' + selectedRow.id + '/delete',
                             success: function(data){
                                 if(data.status == 200){
                                     $LGrid.datagrid('reload');
@@ -286,7 +287,7 @@
                 $.messager.confirm('提示', '确认删除此条记录?', function(r){
                     if(r){
                         $.ajax({
-                            url: 'basic/goods/' + selectedRow.id + '/delete',
+                            url: 'leasing/basic/goods/' + selectedRow.id + '/delete',
                             success: function(data){
                                 if(data.status == 200){
                                     $RGrid.datagrid('reload');

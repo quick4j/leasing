@@ -27,15 +27,18 @@
             <label class="control-label" for="goodsSpec">规格型号</label>
             <div class="form-field">
                 <input class="easyui-textbox" type="text" id="goodsSpec" style="width: 100%"
-                       name="spec" data-options="required:true">
+                       name="spec">
             </div>
         </div>
         <div class="row">
-            <label class="control-label required" for="goodsUnit">计量单位</label>
+            <label class="control-label" for="goodsUnit">计量单位</label>
             <div class="form-field">
                 <select id="goodsUnit" name="unit" style="width: 100%;">
+                    <option value="">--请选择--</option>
                     <option value="G">根</option>
                     <option value="T">套</option>
+                    <option value="J">斤</option>
+                    <option value="CM">cm</option>
                 </select>
             </div>
         </div>
@@ -61,7 +64,13 @@
             }
         });
 
-        $('#goodsUnit').combobox({panelMaxHeight: 100, value: goods.unit});
+        $('#goodsUnit').combobox({
+            panelMaxHeight: 100,
+            value: goods.unit,
+            customAttr:{
+                headervalue: '--请选择--'
+            }
+        }).combo('followCustomHandle');
 
         $("#goodsId").val(goods.id);
         $("#goodsCode").textbox('setValue', goods.code);
@@ -78,7 +87,7 @@
 
     function saveData(win, callback){
         $('#newGoodsForm').form('submit', {
-            url: 'basic/goods/edit',
+            url: 'leasing/basic/goods/edit',
             onSubmit: function(){
                 return $(this).form('validate');
             },

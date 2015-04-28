@@ -5,6 +5,8 @@ import com.github.quick4j.core.service.CrudService;
 import com.github.quick4j.core.util.JsonUtils;
 import com.github.quick4j.core.web.http.AjaxResponse;
 import com.github.quick4j.leasing.basic.goods.entity.Goods;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +20,10 @@ import javax.validation.Valid;
  * @author zhaojh.
  */
 @Controller
-@RequestMapping("/goods")
+@RequestMapping("/basic/goods")
 public class GoodsController {
-    private final String LOCATION = "goods/";
+    private static final Logger logger = LoggerFactory.getLogger(GoodsController.class);
+    private final String LOCATION = "basic/goods/";
 
     @Resource
     private CrudService<Goods> crudService;
@@ -64,7 +67,7 @@ public class GoodsController {
     )
     @ResponseBody
     public AjaxResponse doUpdate(@Valid Goods goods){
-        System.out.println(JsonUtils.toJson(goods));
+        logger.info("===>Goods: " + JsonUtils.toJson(goods));
         crudService.save(goods);
         return new AjaxResponse(true);
     }
