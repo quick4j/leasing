@@ -1,9 +1,9 @@
-package com.github.quick4j.leasing.lease.summary.web.controller;
+package com.github.quick4j.leasing.summary.web.controller;
 
 import com.github.quick4j.core.service.Criteria;
 import com.github.quick4j.core.service.CrudService;
 import com.github.quick4j.core.web.http.AjaxResponse;
-import com.github.quick4j.leasing.lease.summary.entity.SummaryResult;
+import com.github.quick4j.leasing.summary.entity.SummaryResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

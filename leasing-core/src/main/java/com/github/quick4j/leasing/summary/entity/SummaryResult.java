@@ -1,4 +1,4 @@
-package com.github.quick4j.leasing.lease.summary.entity;
+package com.github.quick4j.leasing.summary.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.quick4j.core.entity.AbstractEntity;

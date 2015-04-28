@@ -88,7 +88,7 @@
                             doSummary();
                         }
                     }],
-                    url: 'lease/summary/leasing',
+                    url: 'leasing/summary/leasing',
                     queryParams: {_loading: false},
                     sortName: 'goodsName',
                     onBeforeLoad: function(param){
