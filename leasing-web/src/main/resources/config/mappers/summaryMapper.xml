@@ -4,6 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.quick4j.leasing.summary.entity.SummaryResultMapper">
     <resultMap id="summaryResult" type="com.github.quick4j.leasing.summary.entity.SummaryResult">
+        <result property="goodsType" column="goods_type"/>
         <result property="goodsName" column="goods_name"/>
         <result property="goodsSpec" column="goods_spec"/>
         <result property="packages" column="packages"/>
@@ -43,7 +44,7 @@
         select t.goods_type, t.goods_name, t.goods_spec, sum(t.packages) as packages, sum(t.numbers) as numbers
         from (<include refid="subSelectLeaseOrder"/>) t
         group by goods_id
-        order by goods_name, goods_spec
+        order by goods_type, goods_spec
     </select>
 
     <select id="generalReletSummary" resultMap="summaryResult" parameterType="map">
