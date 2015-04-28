@@ -11,6 +11,7 @@ import java.util.List;
  * @author zhaojh.
  */
 public class SummaryResult extends AbstractEntity {
+    private String goodsType;
     private String goodsName;
     private String goodsSpec;
     private String packages;
@@ -73,5 +74,13 @@ public class SummaryResult extends AbstractEntity {
 
     public void setPackages(String packages) {
         this.packages = packages;
+    }
+
+    public String getGoodsType() {
+        return goodsType;
+    }
+
+    public void setGoodsType(String goodsType) {
+        this.goodsType = goodsType;
     }
 }
