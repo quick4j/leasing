@@ -90,13 +90,52 @@
                     }],
                     url: 'leasing/summary/leasing',
                     queryParams: {_loading: false},
-                    sortName: 'goodsName',
+                    rowStyler: function(index,row){
+                        if(row.goodsName == '合计'){
+                            return 'background-color:#6293BB;color:#fff;font-weight: bold;';
+                        }
+                    },
                     onBeforeLoad: function(param){
                         return param._loading;
                     },
                     loadFilter: function(data){
                         if(data.status == 200){
-                            return data.data;
+                            var handleGoodsTypeTotal = function(data){
+                                var tmp = [];
+                                var total1 = 0, total2 = 0;
+                                if(data.rows && data.rows.length > 0){
+                                    for(var i= 0, length = data.rows.length; i<length; i++){
+                                        tmp.push(data.rows[i]);
+                                        total1 += parseInt(data.rows[i].packages);
+                                        total2 += parseInt(data.rows[i].numbers);
+
+                                        if(data.rows[i+1] && data.rows[i].goodsType != data.rows[i+1].goodsType){
+                                            tmp.push({
+                                                goodsName: '合计',
+                                                goodsSpec: '',
+                                                packages: total1,
+                                                numbers: total2
+                                            });
+
+                                            total1 = total2 = 0;
+                                        }
+
+                                        if(i == length-1){
+                                            tmp.push({
+                                                goodsName: '合计',
+                                                goodsSpec: '',
+                                                packages: total1,
+                                                numbers: total2
+                                            });
+
+                                            total1 = total2 = 0;
+                                        }
+                                    }
+                                    data.rows = tmp;
+                                }
+                                return data;
+                            }
+                            return handleGoodsTypeTotal(data.data);
                         }else{
                             return {}
                         }
