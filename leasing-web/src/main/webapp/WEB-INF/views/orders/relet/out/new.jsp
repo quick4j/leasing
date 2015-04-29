@@ -280,7 +280,7 @@
                             width: 600,
                             height: 400,
                             data: {
-                                code: $hodlerPlugin.textbox('getText'),
+                                searchValue: $hodlerPlugin.textbox('getText'),
                                 callback: function(project){
                                     $hodlerPlugin.textbox('setValue', project.id)
                                             .textbox('setText', project.name + '(' + project.holderName + ')');
