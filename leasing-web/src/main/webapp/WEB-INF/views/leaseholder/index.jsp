@@ -10,8 +10,8 @@
         <link rel="stylesheet" href="static/js/vender/easyui/themes/icon.css">
     </head>
     <body class="easyui-layout">
-        <div data-options="region: 'north', border: true, split:false, minHeight: 35, maxHeight:35"
-             style="overflow: hidden; height: 35px;">
+        <div data-options="region: 'north', border: true, split:false"
+             style="overflow: hidden; height: 38px;">
             <div id="tb"></div>
         </div>
         <div data-options="region:'west', border: false, split:true, minWidth: 300, maxWidth: 300">
