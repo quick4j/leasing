@@ -11,9 +11,26 @@
     </head>
     <body class="easyui-layout">
         <!-- toolbar -->
-        <div data-options="region: 'north', border: true, split:false, minHeight: 35, maxHeight:35"
-             style="overflow: hidden; height: 35px;">
-            <div id="topToolbar"></div>
+        <div data-options="region: 'north', border: true, split:false"
+             style="overflow: hidden; height: 38px;">
+            <div id="topToolbar">
+                <div style="display: inline-block; float: left">
+                    <a href="javascript:" class="easyui-linkbutton"
+                       data-options="plain:true,iconCls:'icon-add'" onclick="doNewDialog()">新建</a>
+                </div>
+                <div style="display: inline-block; float: left">
+                    <a href="javascript:" class="easyui-linkbutton"
+                       data-options="plain:true,iconCls:'icon-edit'" onclick="doEditDialog()">编辑</a>
+                </div>
+                <div style="display: inline-block; float: left">
+                    <a href="javascript:" class="easyui-linkbutton"
+                       data-options="plain:true,iconCls:'icon-remove'" onclick="doDelete()">删除</a>
+                </div>
+                <div class="dialog-tool-separator"></div>
+                <div style="margin-left: 10px; margin-right: 10px; display: inline-block; float: right">
+                    <input id="searchbox" type="text" >
+                </div>
+            </div>
         </div>
         <!-- 单据明细 -->
         <div data-options="region: 'south', split:true" style="height: 50%;">
@@ -72,7 +89,7 @@
         <!-- script -->
         <script src="static/js/vender/jquery-1.11.1.min.js"></script>
         <script src="static/js/vender/jquery.json-2.3.js"></script>
-        <script src="static/js/vender/moment-with-langs.min.js"></script>
+        <script src="static/js/vender/moment-with-locales.min.js"></script>
         <script src="static/js/vender/easyui/jquery.easyui.min.js"></script>
         <script src="static/js/vender/easyui/jquery.easyui.patch.js"></script>
         <script src="static/js/vender/easyui/locale/easyui-lang-zh_CN.js"></script>
@@ -84,6 +101,7 @@
             $(function(){
                 initToolbar();
                 initTopToolbar();
+                initSearchBox();
             });
 
             function formateHolder(value,row,index){
@@ -127,22 +145,21 @@
             }
 
             function initTopToolbar(){
-                $('#topToolbar').toolbar({
-                    data:[{
-                        id: 'tbBtnNew',
-                        text: '新建',
-                        iconCls: 'icon-add',
-                        handler: doNewDialog
-                    },'-',{
-                        id: 'tbBtnEdit',
-                        text: '编辑',
-                        iconCls: 'icon-edit',
-                        handler: doEditDialog
-                    },'-',{
-                        id: 'tbBtnDelete',
-                        text: '删除',
-                        iconCls: 'icon-remove',
-                        handler: doDelete
+                $('#topToolbar').toolbar({});
+            }
+
+            function initSearchBox(){
+                $('#searchbox').datebox({
+                    width: 200,
+                    editable: true,
+                    prompt:'请输入开票日期',
+                    buttonIcon:'icon-search',
+                    onClickButton: doSearch,
+                    icons: [{
+                        iconCls:'icon-remove',
+                        handler: function(e){
+                            $(e.data.target).datebox('clear');
+                        }
                     }]
                 });
             }
@@ -203,6 +220,15 @@
                         });
                     }
                 });
+            }
+
+            function doSearch(){
+                var m = moment($('#searchbox').datebox('getValue'), 'YYYY-MM-DD');
+                var params = {type: 'IN'};
+                if(m.isValid()){
+                    $.extend(params, {openTime: m.valueOf()});
+                }
+                $('#orders').datagrid('load', params);
             }
         </script>
     </body>
