@@ -52,14 +52,54 @@
                         {field: 'numbers', title: '米数', width: 200}
                     ]],
                     toolbar: '#tlb',
-                    url: 'lease/summary/relet',
+                    url: 'leasing/summary/relet',
                     queryParams: {_loading: false},
+                    rowStyler: function(index,row){
+                        if(row.goodsSpec == '合计'){
+                            return 'background-color:#6293BB;color:#fff;font-weight: bold;';
+                        }
+                    },
                     onBeforeLoad: function(param){
                         return param._loading;
                     },
                     loadFilter: function(data){
                         if(data.status == 200){
-                            return data.data;
+                            var handleGoodsTypeTotal = function(data){
+                                var tmp = [];
+                                var total1 = 0, total2 = 0;
+                                if(data.rows && data.rows.length > 0){
+                                    for(var i= 0, length = data.rows.length; i<length; i++){
+                                        tmp.push(data.rows[i]);
+                                        total1 += parseInt(data.rows[i].packages);
+                                        total2 += parseInt(data.rows[i].numbers);
+
+                                        if(data.rows[i+1] && data.rows[i].goodsType != data.rows[i+1].goodsType){
+                                            tmp.push({
+                                                goodsName: '',
+                                                goodsSpec: '合计',
+                                                packages: total1,
+                                                numbers: total2
+                                            });
+
+                                            total1 = total2 = 0;
+                                        }
+
+                                        if(i == length-1){
+                                            tmp.push({
+                                                goodsName: '',
+                                                goodsSpec: '合计',
+                                                packages: total1,
+                                                numbers: total2
+                                            });
+
+                                            total1 = total2 = 0;
+                                        }
+                                    }
+                                    data.rows = tmp;
+                                }
+                                return data;
+                            }
+                            return handleGoodsTypeTotal(data.data);
                         }else{
                             return {}
                         }
@@ -93,13 +133,13 @@
                     width: 600,
                     height: 400,
                     data: {
-                        code: $('#searchLeaser').textbox('getText'),
+                        searchValue: $('#searchLeaser').textbox('getText'),
                         callback: function(holder){
                             $('#searchLeaser').textbox('setValue', holder.id)
                                     .textbox('setText', holder.name);
                         }
                     },
-                    content: 'url:lease/dialog/leasers',
+                    content: 'url:leasing/orders/common/dialog/leasers',
                     buttons:[{
                         text: '确定',
                         iconCls: 'icon-ok',
