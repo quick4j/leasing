@@ -71,7 +71,7 @@
         <!-- script -->
         <script src="static/js/vender/jquery-1.11.1.min.js"></script>
         <script src="static/js/vender/jquery.json-2.3.js"></script>
-        <script src="static/js/vender/moment-with-langs.min.js"></script>
+        <script src="static/js/vender/moment-with-locales.min.js"></script>
         <script src="static/js/vender/easyui/jquery.easyui.min.js"></script>
         <script src="static/js/vender/easyui/jquery.easyui.patch.js"></script>
         <script src="static/js/vender/easyui/locale/easyui-lang-zh_CN.js"></script>
