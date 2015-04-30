@@ -13,7 +13,7 @@
         <div data-options="region:'center', border: false">
             <div data-options="region: 'north'"
                  style="overflow: hidden; height: 38px;">
-                <div id="tb"></div>
+                <div id="stb"></div>
             </div>
             <div data-options="region:'center', border: false" style="padding-top: 3px;">
                 <div style="height:280px;width:800px;left:10%;position:relative;">
@@ -80,23 +80,26 @@
         <script src="static/js/quick4j.datagrid.js"></script>
         <script src="static/js/quick4j.util.js"></script>
         <script>
-            $(function(){
-                initToolbar();
+            function doInit(dialog){
+                initToolbar(dialog);
                 initHolderPlugin();
                 initOpenTimePlugin();
-            });
-            function initToolbar(){
-                $('#tb').toolbar({
+            }
+
+            function initToolbar(dialog){
+                $('#stb').toolbar({
                     data:[{
                         id: 'tbBtnSave',
                         text: '保存',
                         iconCls: 'icon-save',
                         handler: doSubmit
                     },'-',{
-                        id: 'tbBtnPrint',
-                        text: '打印',
-                        iconCls: 'icon-print',
-                        handler: function(){}
+                        id: 'tbBtnClose',
+                        text: '关闭',
+                        iconCls: 'icon-cancel',
+                        handler: function(){
+                            dialog.close();
+                        }
                     }]
                 });
             }
@@ -104,6 +107,12 @@
             function initHolderPlugin(){
                 $("#holder").textbox({
                     buttonIcon: 'icon-search',
+                    icons:[{
+                        iconCls:'icon-remove',
+                        handler: function(e){
+                            $(e.data.target).textbox('clear');
+                        }
+                    }],
                     required: true,
                     onClickButton: function(){
                         showSearchProjectDialog();
