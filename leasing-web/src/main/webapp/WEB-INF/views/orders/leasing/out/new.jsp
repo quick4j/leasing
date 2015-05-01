@@ -270,13 +270,11 @@
                             });
                         }else{
                             $.messager.alert('错误','单据保存失败！' + '<br>' + data.message, 'error');
-                            $('#tbBtnSave').linkbutton('enable');
                         }
 
                     },
                     error: function(){
                         $.messager.alert('提示','单据保存失败！');
-                        $('#tbBtnSave').linkbutton('enable');
                     }
                 });
             }
