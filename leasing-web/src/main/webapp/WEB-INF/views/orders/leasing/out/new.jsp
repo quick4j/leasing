@@ -1,10 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <div class="easyui-layout" data-options="fit:true">
-        <!-- toolbar -->
-        <div data-options="region: 'north', border: true, minHeight: 37, split: false, maxHeight:37"
-             style="overflow: hidden; height: 37px;">
-            <div id="stb"></div>
-        </div>
         <!-- order -->
         <div data-options="region:'center', border: false" style="padding: 10px 30px 20px 30px;">
             <div class="easyui-layout" data-options="fit:true">
@@ -46,28 +41,9 @@
         <script>
             var newOrder = {};
             function doInit(dialog){
-                initToolbar(dialog);
                 initOrderBody();
                 initOpenTime();
                 initHolder();
-            }
-
-            function initToolbar(dialog){
-                $('#stb').toolbar({
-                    data:[{
-                        id: 'tbBtnSave',
-                        text: '保存',
-                        iconCls: 'icon-save',
-                        handler: doSave
-                    },'-',{
-                        id: 'tbBtnClose',
-                        text: '关闭',
-                        iconCls: 'icon-cancel',
-                        handler: function(){
-                            dialog.close();
-                        }
-                    }]
-                });
             }
 
             function initOpenTime(){
@@ -187,19 +163,23 @@
             function showNewGoodsDialog(){
                 $.showModalDialog({
                     title: '添加料具',
-                    content: 'url:leasing/orders/leaseorder/out/goods/add',
+                    content: 'url:leasing/orders/items/add',
                     locate: 'document',
                     height: '50%',
                     width: '450',
-                    data: {datagrid: $('#items')},
+                    data: {
+                        callback: function(goods){
+                            $('#items').datagrid('appendRow', goods);
+                        }
+                    },
                     buttons:[{
                         text: '保存并继续新增',
                         iconCls: 'icon-save',
-                        handler: 'doSaveAndNew'
+                        handler: 'doSubmitAndNew'
                     },{
                         text: '保存',
                         iconCls: 'icon-save',
-                        handler: 'doSave'
+                        handler: 'doSubmit'
                     },{
                         text: '关闭',
                         iconCls: 'icon-cancel',
@@ -218,13 +198,21 @@
             function showEditGoodsDialog(index,row){
                 $.showModalDialog({
                     title: '添加料具',
-                    content: 'url:leasing/orders/leaseorder/out/goods/edit',
+                    content: 'url:leasing/orders/items/edit',
                     locate: 'document',
-                    data: {datagrid: $('#items'), goods: row, index: index},
+                    data: {
+                        goods: row,
+                        callback: function(goods){
+                            $('#items').datagrid('updateRow',{
+                                index: index,
+                                row: goods
+                            });
+                        }
+                    },
                     buttons:[{
                         text: '保存',
                         iconCls: 'icon-save',
-                        handler: 'doSave'
+                        handler: 'doSubmit'
                     },{
                         text: '关闭',
                         iconCls: 'icon-cancel',
@@ -277,7 +265,7 @@
                     success: function(data){
                         if(data.status == 200){
                             $.messager.alert('提示','单据保存成功！', 'info', function(){
-                                dialog.getData('datagrid').datagrid('reload');
+                                dialog.getData('callback')();
                                 dialog.close();
                             });
                         }else{

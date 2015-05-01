@@ -1,11 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div style="padding: 5px;">
-    <form method="post" id="ff">
+    <form method="post" id="newHolderForm">
         <div class="form-group">
             <label class="control-label required" for="code">助记码</label>
             <div class="form-field">
-                <input class="easyui-textbox" type="text" id="code" style="width: 100%"
-                       data-options="required:true">
+                <input class="easyui-textbox" type="text" id="code" style="width: 100%">
             </div>
         </div>
         <div class="form-group">
@@ -39,14 +38,23 @@
             <label class="control-label required" for="numbers">数量</label>
             <div class="form-field">
                 <input class="easyui-numberbox" type="text" id="numbers" style="width: 100%"
-                       data-options="precision:1,editable: false">
+                       data-options="required:true">
             </div>
         </div>
     </form>
 </div>
 <script>
-    var newGoods = {};
+    var editingGoods = {};
     function doInit(dialog){
+        var selected = dialog.getData('goods');
+        $.extend(editingGoods, selected);
+        $('#code').textbox('setValue', editingGoods.goodsCode);
+        $('#name').textbox('setValue', editingGoods.goodsName);
+        $('#spec').textbox('setValue', editingGoods.goodsSpec);
+        $('#location').numberbox('setValue', editingGoods.goodsLocation);
+        $('#packages').numberbox('setValue', editingGoods.packages);
+        $('#numbers').numberbox('setValue', editingGoods.numbers);
+
         bindEventForCodeEditor();
         bindEventForPackagesEditor();
         bindEventForLocationEditor();
@@ -54,39 +62,39 @@
 
     function bindEventForCodeEditor(){
         $('#code').textbox('textbox')
-            .focus()
-            .bind('keypress', function(event){
-                if($(event.target).val().length > 0){
-                    setTimeout(function(){
-                        showSearchGoodsDialog();
-                    }, 2);
-                }
-            })
-            .bind('keydown', function(event){
-                if(event.keyCode == 13){
-                    $('#location').numberbox('textbox').focus();
-                }
-            });
+                .focus()
+                .bind('keypress', function(event){
+                    if($(event.target).val().length > 0){
+                        setTimeout(function(){
+                            showSearchGoodsDialog();
+                        }, 2);
+                    }
+                })
+                .bind('keydown', function(event){
+                    if(event.keyCode == 13){
+                        $('#location').numberbox('textbox').focus();
+                    }
+                });
     }
 
     function bindEventForPackagesEditor() {
         $('#packages').textbox("textbox")
-            .bind('keypress', function(event){
-                setTimeout(function(){
-                    calcNumber();
-                }, 5);
-            })
-            .bind('keydown', function(event){
-                if(event.keyCode == 8){
+                .bind('keypress', function(event){
                     setTimeout(function(){
                         calcNumber();
                     }, 5);
-                }
+                })
+                .bind('keydown', function(event){
+                    if(event.keyCode == 8){
+                        setTimeout(function(){
+                            calcNumber();
+                        }, 5);
+                    }
 
-                if(event.keyCode == 13){
-                    $('#packages').numberbox('textbox').focus();
-                }
-            });
+                    if(event.keyCode == 13){
+                        $('#packages').numberbox('textbox').focus();
+                    }
+                });
     }
 
     function bindEventForLocationEditor(){
@@ -122,7 +130,7 @@
                     $('#name').textbox('setValue', goods.name);
                     $('#spec').textbox('setValue', goods.spec);
 
-                    $.extend(newGoods, {
+                    $.extend(editingGoods, {
                         goodsId: goods.id,
                         goodsType: goods.type,
                         goodsCode: goods.code,
@@ -154,26 +162,14 @@
         });
     }
 
-    function doSaveAndNew(dialog){
-        if(!$.isEmptyObject(newGoods)){
-            $.extend(newGoods, {
-                goodsLocation: $('#location').numberbox('getValue'),
-                packages: $('#packages').numberbox('getValue'),
-                numbers: $('#numbers').numberbox('getValue')
-            });
-            dialog.getData('datagrid').datagrid('appendRow',newGoods);
-        }
-        $('#ff').form('clear');
-    }
-
     function doSave(dialog){
-        if(!$.isEmptyObject(newGoods)){
-            $.extend(newGoods, {
+        if(!$.isEmptyObject(editingGoods)){
+            $.extend(editingGoods, {
                 goodsLocation: $('#location').textbox('getValue'),
                 packages: $('#packages').numberbox('getValue'),
                 numbers: $('#numbers').numberbox('getValue')
             });
-            dialog.getData('datagrid').datagrid('appendRow',newGoods);
+            dialog.getData('callback')(editingGoods);
         }
         dialog.close();
     }

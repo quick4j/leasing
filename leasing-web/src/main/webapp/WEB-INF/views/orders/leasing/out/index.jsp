@@ -171,9 +171,25 @@
                 $.showModalDialog({
                     title: '新建--发料单',
                     content: 'url:leasing/orders/leaseorder/out/new',
+                    data: {
+                        callback: function(){
+                            $('#orders').datagrid('reload');
+                        }
+                    },
                     height: '90%',
                     width: '90%',
                     locate: 'document',
+                    toolbar:[{
+                        text: '保存',
+                        iconCls: 'icon-save',
+                        handler: 'doSave'
+                    },'-',{
+                        text: '关闭',
+                        iconCls: 'icon-cancel',
+                        handler: function(dialog){
+                            dialog.close();
+                        }
+                    }],
                     onLoad: function(dialog, body){
                         if(body && body.doInit){
                             body.doInit(dialog);
@@ -194,6 +210,7 @@
                 $.showModalDialog({
                     title: '新建--发料单',
                     content: 'url:leasing/orders/leaseorder/out/' + selected.id + '/edit',
+                    data: {datagrid: $('#orders')},
                     useiframe: true,
                     height: '90%',
                     width: '90%',
