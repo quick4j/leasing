@@ -11,10 +11,6 @@
     </head>
     <body class="easyui-layout">
         <div data-options="region:'center', border: false">
-            <div data-options="region: 'north'"
-                 style="overflow: hidden; height: 38px;">
-                <div id="stb"></div>
-            </div>
             <div data-options="region:'center', border: false" style="padding-top: 3px;">
                 <div style="height:280px;width:800px;left:10%;position:relative;">
                     <div style="text-align: center;height: 40px;font-size: 20px; padding-top: 5px; letter-spacing: 8px;">
@@ -81,27 +77,8 @@
         <script src="static/js/quick4j.util.js"></script>
         <script>
             function doInit(dialog){
-                initToolbar(dialog);
                 initHolderPlugin();
                 initOpenTimePlugin();
-            }
-
-            function initToolbar(dialog){
-                $('#stb').toolbar({
-                    data:[{
-                        id: 'tbBtnSave',
-                        text: '保存',
-                        iconCls: 'icon-save',
-                        handler: doSubmit
-                    },'-',{
-                        id: 'tbBtnClose',
-                        text: '关闭',
-                        iconCls: 'icon-cancel',
-                        handler: function(){
-                            dialog.close();
-                        }
-                    }]
-                });
             }
 
             function initHolderPlugin(){
@@ -188,7 +165,7 @@
                 });
             }
 
-            function doSubmit(){
+            function doSave(dialog){
                 if(!$('#holder').textbox('isValid')){
                     $.messager.alert('警告', '请选择承建单位', 'warning', function(){
                         $('#holder').textbox('textbox').focus();
@@ -213,7 +190,10 @@
                     data: {leaseorder: $.toJSON(order)},
                     success: function(result){
                         if(result.status == 200){
-                            location.href = 'leasing/orders/leaseorder/out/' + order.id;
+                            $.messager.alert('提示','单据保存成功！', 'info', function(){
+                                dialog.getData('callback')();
+                                dialog.close();
+                            });
                         }else{
                             $.messager.alert('错误','单据保存失败！' + '<br>' + result.message, 'error');
                         }
