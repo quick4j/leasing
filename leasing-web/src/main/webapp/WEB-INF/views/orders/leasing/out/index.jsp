@@ -215,7 +215,6 @@
                             $('#orders').datagrid('reload');
                         }
                     },
-                    useiframe: true,
                     height: '90%',
                     width: '90%',
                     locate: 'document',
