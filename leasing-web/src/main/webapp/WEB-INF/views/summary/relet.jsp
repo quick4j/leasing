@@ -10,12 +10,14 @@
         <link rel="stylesheet" href="static/js/vender/easyui/themes/icon.css">
     </head>
     <body class="easyui-layout">
-        <div data-options="region:'center', border: false">
+        <div data-options="region:'west',split:true" style="width: 20%;">
+            <div id="tb1">
+                助记码：<input id="searchLeaserBox">
+            </div>
+            <table id="leaserGrid"></table>
+        </div>
+        <div data-options="region:'center'">
             <div id="tlb">
-                <div style="float: left; padding: 2px; margin-left: 50px;">
-                    <label for="searchLeaser">租借单位：</label>
-                    <input class="easyui-textbox" id="searchLeaser">
-                </div>
                 <a class="easyui-linkbutton" href="javascript:"
                    data-options="iconCls:'icon-search',plain:true"
                    onclick="doSummary()">汇总</a>
@@ -36,7 +38,8 @@
         <script>
             $(function(){
                 initSummaryGridPlugin();
-                initSearchLeaserBoxPlugin();
+                initLeaserGrid();
+                initSearchLeaserBox();
             });
 
             function initSummaryGridPlugin(){
@@ -107,66 +110,74 @@
                 });
             }
 
-            function initSearchLeaserBoxPlugin(){
-                $('#searchLeaser').textbox({
-                    buttonIcon: 'icon-search',
-                    onClickButton: function(){
-                        showSearchLeaserDialog();
+            function initSearchLeaserBox(){
+                $('#searchLeaserBox').textbox({
+                    buttonIcon: 'icon-remove',
+                    onClickButton:function(){
+                        $(this).textbox('clear');
+                    },
+                    onChange: function(newValue,oldValue){
+                        if(newValue.length == 0){
+                            $('#leaserGrid').datagrid('load', {});
+                        }
                     }
                 }).textbox('textbox')
-                        .focus()
-                        .bind('keypress', function(event){
+                        .bind('keypress',function(event){
                             setTimeout(function(){
-                                var value = $(event.target).val();
-                                if(value.length > 0){
-                                    showSearchLeaserDialog();
+                                var searchValue = $(event.target).val();
+                                var params = {};
+                                if(searchValue.length>0){
+                                    $.extend(params, {code: searchValue});
                                 }
+                                $('#leaserGrid').datagrid('load', params);
                             }, 5);
                         });
             }
 
-            function showSearchLeaserDialog(){
-                if($('#leasersDialog').length > 0) return;
-                $.showModalDialog({
-                    id: 'leasersDialog',
-                    title: '选择-租借单位',
-                    width: 600,
-                    height: 400,
-                    data: {
-                        searchValue: $('#searchLeaser').textbox('getText'),
-                        callback: function(holder){
-                            $('#searchLeaser').textbox('setValue', holder.id)
-                                    .textbox('setText', holder.name);
+            function initLeaserGrid(){
+                $('#leaserGrid').datagrid({
+                    url:'api/rest/datagrid/leasers',
+                    title:'承租单位',
+                    fit:true,
+                    striped: true,
+                    singleSelect:true,
+                    border:false,
+                    columns:[[
+                        {field:'code', title:'助记码', width: 100},
+                        {field:'name',title:'名称',width:200}
+                    ]],
+                    toolbar: '#tb1',
+                    loadFilter: function(data){
+                        if(data.status == 200){
+                            return data.data;
+                        }else{
+                            return {}
                         }
                     },
-                    content: 'url:leasing/orders/common/dialog/leasers',
-                    buttons:[{
-                        text: '确定',
-                        iconCls: 'icon-ok',
-                        handler: 'doOK'
-                    },{
-                        text: '取消',
-                        iconCls: 'icon-cancel',
-                        handler: function(dialog){
-                            dialog.close();
-                        }
-                    }],
-                    onLoad: function(dialog, body){
-                        if(body && body.doInit){
-                            body.doInit(dialog);
-                        }
+                    onSelect: function(index,row){
+                        clearSummaryGrid();
                     }
                 });
             }
 
             function doSummary(){
-                var searchLeaser = $('#searchLeaser').textbox('getValue');
+                var selected = $('#leaserGrid').datagrid('getSelected');
                 var params = {};
-                if(searchLeaser){
-                    $.extend(params, {leaserid: searchLeaser});
+                if(!selected){
+                    $.messager.alert("警告", "请选择要汇总的租借单位!", "warning");
+                    return;
                 }
 
+                $.extend(params, {leaserid: selected.id});
                 $('#summaryGrid').datagrid('load',params);
+            }
+
+            function clearSummaryGrid(){
+                var $summaryGrid = $('#summaryGrid');
+                var length = $summaryGrid.datagrid('getRows').length;
+                for(var i=length-1; i>-1; i--){
+                    $summaryGrid.datagrid('deleteRow', i);
+                }
             }
         </script>
     </body>
