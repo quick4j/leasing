@@ -162,7 +162,7 @@
         });
     }
 
-    function doSave(dialog){
+    function doSubmit(dialog){
         if(!$.isEmptyObject(editingGoods)){
             $.extend(editingGoods, {
                 goodsLocation: $('#location').textbox('getValue'),
