@@ -48,13 +48,13 @@
                             <table style="width: 100%">
                                 <tr>
                                     <td style="width: 55px;">承租单位：</td>
-                                    <td id="holder" style="width: 200px;"></td>
+                                    <td id="holderName" style="width: 150px;"></td>
                                     <td style="width: 32px;">日期：</td>
-                                    <td id="opentime" style="width: 80px;"></td>
-                                    <td style="width: 32px;">车号：</td>
-                                    <td id="carnumber" style="width: 80px;"></td>
+                                    <td id="billOpentime" style="width: 80px;"></td>
+                                    <td style="width: 50px;">承租单位：</td>
+                                    <td id="leaserName" style="width: 80px;"></td>
                                     <td style="width: 32px;">编号：</td>
-                                    <td id="code" style="width: 140px;"></td>
+                                    <td id="billCode" style="width: 100px;"></td>
                                 </tr>
                             </table>
                         </div>
@@ -114,10 +114,11 @@
 
             function showOrderDetail(index, row){
                 var holder = row.projectName + '(' + row.holderName + ')';
-                $('#holder').text(holder);
+                $('#holderName').text(holder);
                 var opentime = quick4j.util.dateFormate.format(row.openTime, 'YYYY-MM-DD');
-                $('#opentime').text(opentime);
-                $('#code').text(row.code);
+                $('#billOpentime').text(opentime);
+                $('#billCode').text(row.code);
+                $('#leaserName').text(row.leaserName);
 
                 $('#details').datagrid('reload', {
                     _loading: true,
@@ -126,9 +127,10 @@
             }
 
             function clearOrderDetail(){
-                $('#holder').text('');
-                $('#opentime').text('');
-                $('#code').text('');
+                $('#holderName').text('');
+                $('#billOpentime').text('');
+                $('#billCode').text('');
+                $('#leaserName').text('');
 
                 $('#details').datagrid('loadData',{});
             }
@@ -168,10 +170,30 @@
                 $.showModalDialog({
                     title: '新建--发料单',
                     content: 'url:leasing/orders/relet/in/new',
-                    useiframe: true,
+                    data: {
+                        callback: function(){
+                            $('#orders').datagrid('reload');
+                        }
+                    },
                     height: '90%',
                     width: '90%',
-                    locate: 'document'
+                    locate: 'document',
+                    toolbar:[{
+                        text: '保存',
+                        iconCls: 'icon-save',
+                        handler: 'doSave'
+                    },'-',{
+                        text: '关闭',
+                        iconCls: 'icon-cancel',
+                        handler: function(dialog){
+                            dialog.close();
+                        }
+                    }],
+                    onLoad: function(dialog, body){
+                        if(body && body.doInit){
+                            body.doInit(dialog);
+                        }
+                    }
                 });
             }
 
@@ -187,10 +209,30 @@
                 $.showModalDialog({
                     title: '新建--发料单',
                     content: 'url:leasing/orders/relet/in/' + selected.id + '/edit',
-                    useiframe: true,
+                    data: {
+                        callback: function(){
+                            $('#orders').datagrid('reload');
+                        }
+                    },
                     height: '90%',
                     width: '90%',
-                    locate: 'document'
+                    locate: 'document',
+                    toolbar:[{
+                        text: '保存',
+                        iconCls: 'icon-save',
+                        handler: 'doSave'
+                    },'-',{
+                        text: '关闭',
+                        iconCls: 'icon-cancel',
+                        handler: function(dialog){
+                            dialog.close();
+                        }
+                    }],
+                    onLoad: function(dialog, body){
+                        if(body && body.doInit){
+                            body.doInit(dialog);
+                        }
+                    }
                 });
             }
 
