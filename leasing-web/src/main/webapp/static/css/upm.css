@@ -19,4 +19,4 @@
 
 .tip{padding: 15px; background-color: #fcf8e3; border: 1px solid transparent; border-color: #faebcc; border-radius: 4px;margin-top: 20px;}
 .tip-icon{display: inline-block; height: 18px; width:18px;}
-.tip-text{display: inline-block}
+.tip-text{display: inline-block; color: #8a6d3b; word-spacing: 1px; letter-spacing: 1px;}
