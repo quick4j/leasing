@@ -67,6 +67,7 @@
                     height: 150,
                     content: 'url:leasing/leaser/new',
                     data: {datagrid: $MGrid},
+                    locate: 'document',
                     buttons:[{
                         text: '保存并继续新增',
                         iconCls: 'icon-save',
@@ -107,6 +108,7 @@
                     height: 150,
                     content: 'url:leasing/leaser/'+selectedRow.id+'/edit',
                     data: {datagrid: $MGrid, leaser: selectedRow},
+                    locate: 'document',
                     buttons:[{
                         text: '保存',
                         iconCls: 'icon-save',
