@@ -5,14 +5,14 @@
             <label class="control-label required" for="code">助记码</label>
             <div class="form-field">
                 <input class="easyui-textbox" type="text" id="code" style="width: 100%"
-                       data-options="required:true">
+                       data-options="required:true,buttonIcon:'icon-search',onClickButton: showSearchGoodsDialog">
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" for="name">料具名称</label>
+            <label class="control-label required" for="name">料具名称</label>
             <div class="form-field">
                 <input class="easyui-textbox" type="text" id="name" style="width: 100%"
-                       data-options="editable:false">
+                       data-options="editable:false, required:true">
             </div>
         </div>
         <div class="form-group">
@@ -155,26 +155,37 @@
     }
 
     function doSubmitAndNew(dialog){
-        if(!$.isEmptyObject(newGoods)){
-            $.extend(newGoods, {
-                goodsLocation: $('#location').numberbox('getValue'),
-                packages: $('#packages').numberbox('getValue'),
-                numbers: $('#numbers').numberbox('getValue')
-            });
-            dialog.getData('callback')(newGoods);
-        }
-        $('#ff').form('clear');
+        doSaveData(dialog, function(){
+            newGoods = {};
+            $('#ff').form('clear');
+        });
     }
 
-    function doSubmit(dialog){
-        if(!$.isEmptyObject(newGoods)){
-            $.extend(newGoods, {
-                goodsLocation: $('#location').textbox('getValue'),
-                packages: $('#packages').numberbox('getValue'),
-                numbers: $('#numbers').numberbox('getValue')
-            });
-            dialog.getData('callback')(newGoods);
+    function doSubmit(dialog, fn){
+        doSaveData(dialog, function(){
+            dialog.close();
+        });
+    }
+
+    function doSaveData(dialog, fn){
+        if(!$('#name').textbox('isValid')){
+            return;
         }
-        dialog.close();
+
+        if(!$('#packages').textbox('isValid')){
+            return;
+        }
+
+        $.extend(newGoods, {
+            goodsLocation: $('#location').textbox('getValue'),
+            packages: $('#packages').numberbox('getValue'),
+            numbers: $('#numbers').numberbox('getValue')
+        });
+
+        dialog.getData('callback')(newGoods);
+
+        if(fn){
+            fn();
+        }
     }
 </script>

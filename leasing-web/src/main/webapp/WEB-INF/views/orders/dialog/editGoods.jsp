@@ -4,14 +4,15 @@
         <div class="form-group">
             <label class="control-label required" for="code">助记码</label>
             <div class="form-field">
-                <input class="easyui-textbox" type="text" id="code" style="width: 100%">
+                <input class="easyui-textbox" type="text" id="code" style="width: 100%"
+                        data-options="required:true,buttonIcon:'icon-search',onClickButton: showSearchGoodsDialog">
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" for="name">料具名称</label>
+            <label class="control-label required" for="name">料具名称</label>
             <div class="form-field">
                 <input class="easyui-textbox" type="text" id="name" style="width: 100%"
-                       data-options="editable:false">
+                       data-options="editable:false,required:true">
             </div>
         </div>
         <div class="form-group">
@@ -163,14 +164,22 @@
     }
 
     function doSubmit(dialog){
-        if(!$.isEmptyObject(editingGoods)){
-            $.extend(editingGoods, {
-                goodsLocation: $('#location').textbox('getValue'),
-                packages: $('#packages').numberbox('getValue'),
-                numbers: $('#numbers').numberbox('getValue')
-            });
-            dialog.getData('callback')(editingGoods);
+        if(!$('#name').textbox('isValid')){
+            return;
         }
+
+        if(!$('#packages').textbox('isValid')){
+            return;
+        }
+
+
+        $.extend(editingGoods, {
+            goodsLocation: $('#location').textbox('getValue'),
+            packages: $('#packages').numberbox('getValue'),
+            numbers: $('#numbers').numberbox('getValue')
+        });
+        dialog.getData('callback')(editingGoods);
         dialog.close();
     }
+
 </script>
