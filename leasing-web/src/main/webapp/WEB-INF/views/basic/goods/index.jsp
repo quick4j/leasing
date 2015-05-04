@@ -116,6 +116,7 @@
                     height: 150,
                     content: 'url:leasing/basic/goods/type/new',
                     data: {datagrid: $LGrid},
+                    locate: 'document',
                     buttons:[{
                         text: '保存并继续新增',
                         iconCls: 'icon-save',
@@ -183,7 +184,7 @@
 
                 $.showModalDialog({
                     title: '新建',
-                    width: 400,
+                    width: 500,
                     height: 300,
                     content: 'url:leasing/basic/goods/new',
                     data: {datagrid: $RGrid, goodsType: goodsType},
@@ -223,7 +224,7 @@
 
                 $.showModalDialog({
                     title: '编辑',
-                    width: 400,
+                    width: 500,
                     height: 300,
                     content: 'url:leasing/basic/goods/edit',
                     data: {datagrid: $RGrid, goods: selectedRow},
