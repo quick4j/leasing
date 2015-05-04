@@ -41,8 +41,11 @@
             </div>
         </div>
     </form>
-    <div style="color: #0000ff; margin-top: 10px; font-size: 13px;">
-        注意：如果使用“数量=件数x规格”等式计算数量，请不要在规格中输入单位。
+    <div class="tip">
+        <a class="tip-icon icon-tip"></a>
+        <div class="tip-text">
+            如果使用“数量=件数x规格”等式计算数量，请不要在规格中输入单位。
+        </div>
     </div>
 </div>
 <script>
