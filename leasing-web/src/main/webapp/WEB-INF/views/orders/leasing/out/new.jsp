@@ -102,6 +102,7 @@
                     }
                 }
             ]],
+            idField: 'goodsId',
             rownumbers: true,
             fit: true,
             striped: true,
