@@ -157,6 +157,7 @@
                     height: 150,
                     content: 'url:leasing/basic/goods/type/edit',
                     data: {datagrid: $LGrid, goodsType: selectedRow},
+                    locate: 'document',
                     buttons:[{
                         text: '保存',
                         iconCls: 'icon-save',
@@ -188,6 +189,7 @@
                     height: 300,
                     content: 'url:leasing/basic/goods/new',
                     data: {datagrid: $RGrid, goodsType: goodsType},
+                    locate: 'document',
                     buttons:[{
                         text: '保存并继续新增',
                         iconCls: 'icon-save',
@@ -228,6 +230,7 @@
                     height: 300,
                     content: 'url:leasing/basic/goods/edit',
                     data: {datagrid: $RGrid, goods: selectedRow},
+                    locate: 'document',
                     buttons:[{
                         text: '保存',
                         iconCls: 'icon-save',
