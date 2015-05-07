@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{font-size: 14px;}
+        table,table td,table th{border:1px solid #000;border-collapse:collapse; }
+        table th{text-align: center; font-weight: normal;height: 6mm}
+        table td{padding-left: 10px; height: 7mm}
+        .title{padding: 15px; font-weight: bold; font-size: 18px; text-align: center; letter-spacing: 8px; word-spacing: 8px;}
+        .header{padding-left: 8px; margin-bottom: 5px;}
+        .tip{font-size: smaller;}
+        .tip div{display: inline-block}
+        .tip-item1{width: 100mm}
+        .tip-item2{width: 53mm}
+        .tip-item3{width: 83mm;}
+        .footer div{display: inline-block;width: 59mm;}
+    </style>
+</head>
+    <body>
+        <div style="width: 24cm; padding: 20px 15px; border: 1px dotted;">
+            <!-- title -->
+            <div class="title">
+                周转工具管理中心<%if(type == 'in'){%>收<%}else{%>发<%}%>料单
+            </div>
+            <!-- header -->
+            <div class="header">
+                <div style="display: inline-block; width: 7cm;">承租单位: <%=projectName%>(<%=holderName%>)</div>
+                <div style="display: inline-block; width: 5cm;">日期：<%=openTime%></div>
+                <div style="display: inline-block; width: 4cm;">车号: <%=carNumber%></div>
+                <div style="display: inline-block; width: 6cm;">编号：<%=code%></div>
+            </div>
+            <!-- body -->
+            <div>
+                <table id="body" style="width: 100%">
+                    <tr>
+                        <th style="text-align: center">料具名称</th>
+                        <th style="text-align: center">规格型号</th>
+                        <th style="text-align: center">库位</th>
+                        <th style="text-align: center">入库件数</th>
+                        <th style="text-align: center">入库数量</th>
+                    </tr>
+                    <%for(i=0; i<items.length; i++){%>
+                        <tr>
+                            <td><%=items[i].goodsName%></td>
+                            <td><%=items[i].goodsSpec%></td>
+                            <td><%=items[i].goodsLocation%></td>
+                            <td><%=items[i].packages%></td>
+                            <td><%=items[i].numbers%></td>
+                        </tr>
+                    <%}%>
+
+                    <%if(items.length < 7){%>
+                        <%for(j=0; j<7-items.length; j++){%>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        <%}%>
+                    <%}%>
+                </table>
+            </div>
+            <!-- 注 -->
+            <div class="tip">
+                <div class="tip-item1">
+                    注：计量单位：钢管 &bull; 米，扣件、油拖、步步紧　&bull;　套，底座　&bull;　个
+                </div>
+                <div class="tip-item2">
+                    联系电话：000000
+                </div>
+                <div class="tip-item3">
+                    白-留存　红-记账　黄-使用方　绿-装卸　蓝-运输　白-出门
+                </div>
+            </div>
+            <div class="footer">
+                <div>主管：</div>
+                <div>经办人：</div>
+                <div>承运人：</div>
+                <div>收料人：</div>
+            </div>
+        </div>
+
+        <script>
+            print();
+        </script>
+    </body>
+</html>
