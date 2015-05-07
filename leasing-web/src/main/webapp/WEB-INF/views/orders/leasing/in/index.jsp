@@ -78,6 +78,8 @@
                             name: 'leaseorders',
                             fit: true,
                             striped: true,
+                            sortName: 'openTime',
+                            sortOrder:'desc',
                             singleSelect:true,
                             border:false,
                             rownumbers: true,

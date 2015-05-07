@@ -80,6 +80,8 @@
                     fit: true,
                     striped: true,
                     border:false,
+                    sortName: 'openTime',
+                    sortOrder:'desc',
                     singleSelect:true,
                     rownumbers: true,
                     queryParams: {type: 'OUT'},
@@ -98,6 +100,7 @@
         <script src="static/js/quick4j.parser.js"></script>
         <script src="static/js/quick4j.datagrid.js"></script>
         <script src="static/js/quick4j.util.js"></script>
+        <script src="static/js/vender/template-native.js"></script>
         <script>
             $(function(){
                 initToolbar();
