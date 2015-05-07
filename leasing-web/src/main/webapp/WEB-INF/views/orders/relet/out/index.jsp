@@ -35,10 +35,6 @@
         <!-- 单据明细 -->
         <div data-options="region: 'south', split:true" style="height: 50%;">
             <div class="easyui-layout" data-options="fit:true">
-                <div data-options="region: 'north', border: true"
-                     style="overflow: hidden; height: 38px;">
-                    <div id="tb"></div>
-                </div>
                 <div data-options="region:'center', border: false" style="padding-top: 3px;">
                     <div style="height:280px;width:800px;left:10%;position:relative;">
                         <div class="order-sm-title">
@@ -51,7 +47,7 @@
                                     <td id="holderName" style="width: 150px;"></td>
                                     <td style="width: 32px;">日期：</td>
                                     <td id="billOpentime" style="width: 80px;"></td>
-                                    <td style="width: 50px;">承租单位：</td>
+                                    <td style="width: 50px;">租借单位：</td>
                                     <td id="leaserName" style="width: 80px;"></td>
                                     <td style="width: 32px;">编号：</td>
                                     <td id="billCode" style="width: 100px;"></td>
@@ -99,7 +95,6 @@
         <script src="static/js/quick4j.util.js"></script>
         <script>
             $(function(){
-                initToolbar();
                 initTopToolbar();
                 initSearchBox();
             });
@@ -133,17 +128,6 @@
                 $('#leaserName').text('');
 
                 $('#details').datagrid('loadData',{});
-            }
-
-            function initToolbar(){
-                $('#tb').toolbar({
-                    data:[{
-                        id: 'tbBtnPrint',
-                        text: '打印',
-                        iconCls: 'icon-print',
-                        handler: function(){}
-                    }]
-                });
             }
 
             function initTopToolbar(){
