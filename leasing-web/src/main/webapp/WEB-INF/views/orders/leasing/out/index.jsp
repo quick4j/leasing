@@ -149,7 +149,7 @@
                         id: 'tbBtnPrint',
                         text: '打印',
                         iconCls: 'icon-print',
-                        handler: function(){}
+                        handler: printOrder
                     }]
                 });
             }
@@ -275,6 +275,30 @@
                     $.extend(params, {openTime: m.valueOf()});
                 }
                 $('#orders').datagrid('load', params);
+            }
+
+            function printOrder(){
+                var selected = $('#orders').datagrid('getSelected');
+                if(!selected){
+                    $.messager.alert('警告', '无打印信息。', 'warning');
+                    return;
+                }
+
+                var items = $('#details').datagrid('getRows');
+                $.extend(selected, {
+                    openTime: quick4j.util.dateFormate.format(selected.openTime, 'YYYY-MM-DD'),
+                    items: items
+                });
+
+                $.ajax({
+                    url: 'static/template/leasing.ejs',
+                    success: function(data){
+                        var render = template.compile(data);
+                        var html = render(selected);
+                        var preview=window.open('','');
+                        preview.document.write(html);
+                    }
+                });
             }
         </script>
     </body>
