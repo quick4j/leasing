@@ -284,6 +284,7 @@
 
                 var items = $('#details').datagrid('getRows');
                 $.extend(selected, {
+                    type: selected.type.toLowerCase(),
                     openTime: quick4j.util.dateFormate.format(selected.openTime, 'YYYY-MM-DD'),
                     items: items
                 });
