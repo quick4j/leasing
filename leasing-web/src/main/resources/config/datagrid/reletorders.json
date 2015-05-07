@@ -16,6 +16,11 @@
                 "formatter": "formateHolder"
             },
             {
+                "field":"leaserName",
+                "title":"租借单位",
+                "width": 150
+            },
+            {
                 "field":"openTime",
                 "title":"开票日期",
                 "width": 100,

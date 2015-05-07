@@ -115,6 +115,7 @@
                     height: 150,
                     content: 'url:leasing/holder/new',
                     data: {datagrid: $LGrid},
+                    locate: 'document',
                     buttons:[{
                         text: '保存并继续新增',
                         iconCls: 'icon-save',
@@ -155,6 +156,7 @@
                     height: 150,
                     content: 'url:leasing/holder/'+selectedRow.id+'/edit',
                     data: {datagrid: $LGrid, holder: selectedRow},
+                    locate: 'document',
                     buttons:[{
                         text: '保存',
                         iconCls: 'icon-save',
@@ -186,6 +188,7 @@
                     height: 200,
                     content: 'url:leasing/project/new',
                     data: {datagrid: $RGrid, holderId: holderId},
+                    locate: 'document',
                     buttons:[{
                         text: '保存并继续新增',
                         iconCls: 'icon-save',
@@ -226,6 +229,7 @@
                     height: 200,
                     content: 'url:leasing/project/'+selectedRow.id+'/edit',
                     data: {datagrid: $RGrid, project: selectedRow},
+                    locate: 'document',
                     buttons:[{
                         text: '保存',
                         iconCls: 'icon-save',

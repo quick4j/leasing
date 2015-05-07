@@ -48,13 +48,13 @@
                             <table style="width: 100%">
                                 <tr>
                                     <td style="width: 55px;">承租单位：</td>
-                                    <td id="holder" style="width: 200px;"></td>
+                                    <td id="holderName" style="width: 200px;"></td>
                                     <td style="width: 32px;">日期：</td>
-                                    <td id="opentime" style="width: 80px;"></td>
+                                    <td id="billOpentime" style="width: 80px;"></td>
                                     <td style="width: 32px;">车号：</td>
-                                    <td id="carnumber" style="width: 80px;"></td>
+                                    <td id="carnumber1" style="width: 80px;"></td>
                                     <td style="width: 32px;">编号：</td>
-                                    <td id="code" style="width: 140px;"></td>
+                                    <td id="billCode" style="width: 140px;"></td>
                                 </tr>
                             </table>
                         </div>
@@ -78,6 +78,8 @@
                             name: 'leaseorders',
                             fit: true,
                             striped: true,
+                            sortName: 'openTime',
+                            sortOrder:'desc',
                             singleSelect:true,
                             border:false,
                             rownumbers: true,
@@ -96,6 +98,7 @@
         <script src="static/js/quick4j.parser.js"></script>
         <script src="static/js/quick4j.datagrid.js"></script>
         <script src="static/js/quick4j.util.js"></script>
+        <script src="static/js/vender/template-native.js"></script>
         <script>
             $(function(){
                 initToolbar();
@@ -113,11 +116,11 @@
 
             function showOrderDetail(index, row){
                 var holder = row.projectName + '(' + row.holderName + ')';
-                $('#holder').text(holder);
+                $('#holderName').text(holder);
                 var opentime = quick4j.util.dateFormate.format(row.openTime, 'YYYY-MM-DD');
-                $('#opentime').text(opentime);
-                $('#carnumber').text(row.carNumber);
-                $('#code').text(row.code);
+                $('#billOpentime').text(opentime);
+                $('#carnumber1').text(row.carNumber);
+                $('#billCode').text(row.code);
 
                 $('#details').datagrid('reload', {
                     _loading: true,
@@ -126,10 +129,10 @@
             }
 
             function clearOrderDetail(){
-                $('#holder').text('');
-                $('#opentime').text('');
-                $('#carnumber').text('');
-                $('#code').text('');
+                $('#holderName').text('');
+                $('#billOpentime').text('');
+                $('#carnumber1').text('');
+                $('#billCode').text('');
 
                 $('#details').datagrid('loadData',{});
             }
@@ -140,7 +143,7 @@
                         id: 'tbBtnPrint',
                         text: '打印',
                         iconCls: 'icon-print',
-                        handler: function(){}
+                        handler: printOrder
                     }]
                 });
             }
@@ -169,10 +172,30 @@
                 $.showModalDialog({
                     title: '新建--发料单',
                     content: 'url:leasing/orders/leaseorder/in/new',
-                    useiframe: true,
+                    data: {
+                        callback: function(){
+                            $('#orders').datagrid('reload');
+                        }
+                    },
                     height: '90%',
                     width: '90%',
-                    locate: 'document'
+                    locate: 'document',
+                    toolbar:[{
+                        text: '保存',
+                        iconCls: 'icon-save',
+                        handler: 'doSave'
+                    },'-',{
+                        text: '关闭',
+                        iconCls: 'icon-cancel',
+                        handler: function(dialog){
+                            dialog.close();
+                        }
+                    }],
+                    onLoad: function(dialog, body){
+                        if(body && body.doInit){
+                            body.doInit(dialog);
+                        }
+                    }
                 });
             }
 
@@ -188,10 +211,30 @@
                 $.showModalDialog({
                     title: '新建--发料单',
                     content: 'url:leasing/orders/leaseorder/in/' + selected.id + '/edit',
-                    useiframe: true,
+                    data: {
+                        callback: function(){
+                            $('#orders').datagrid('reload');
+                        }
+                    },
                     height: '90%',
                     width: '90%',
-                    locate: 'document'
+                    locate: 'document',
+                    toolbar:[{
+                        text: '保存',
+                        iconCls: 'icon-save',
+                        handler: 'doSave'
+                    },'-',{
+                        text: '关闭',
+                        iconCls: 'icon-cancel',
+                        handler: function(dialog){
+                            dialog.close();
+                        }
+                    }],
+                    onLoad: function(dialog, body){
+                        if(body && body.doInit){
+                            body.doInit(dialog);
+                        }
+                    }
                 });
             }
 
@@ -230,6 +273,31 @@
                     $.extend(params, {openTime: m.valueOf()});
                 }
                 $('#orders').datagrid('load', params);
+            }
+
+            function printOrder(){
+                var selected = $('#orders').datagrid('getSelected');
+                if(!selected){
+                    $.messager.alert('警告', '无打印信息。', 'warning');
+                    return;
+                }
+
+                var items = $('#details').datagrid('getRows');
+                $.extend(selected, {
+                    type: selected.type.toLowerCase(),
+                    openTime: quick4j.util.dateFormate.format(selected.openTime, 'YYYY-MM-DD'),
+                    items: items
+                });
+
+                $.ajax({
+                    url: 'static/template/leasing.ejs',
+                    success: function(data){
+                        var render = template.compile(data);
+                        var html = render(selected);
+                        var preview=window.open('','');
+                        preview.document.write(html);
+                    }
+                });
             }
         </script>
     </body>

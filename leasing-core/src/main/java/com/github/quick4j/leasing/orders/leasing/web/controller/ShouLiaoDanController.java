@@ -56,6 +56,7 @@ public class ShouLiaoDanController {
 
         Map<String, String> result = new HashMap<String, String>();
         result.put("id", order.getId());
+        result.put("code", order.getCode());
         return new AjaxResponse(true, result);
     }
 

@@ -13,8 +13,8 @@
 
     <sql id="subSelectLeaseOrder">
         select holder_id, project_id, goods_id, goods_name, goods_spec, goods_type,
-          case when order_type='out' then -1*packages else packages end as packages,
-          case when order_type='out' then -1*numbers else numbers end as numbers
+          case when order_type='in' then -1*packages else packages end as packages,
+          case when order_type='in' then -1*numbers else numbers end as numbers
         from lease_orders
         join lease_order_items on lease_order_items.order_id = lease_orders.id
         <where>
@@ -31,8 +31,8 @@
 
     <sql id="subSelectReletOrder">
         select leaser_id, leaser_name, order_type, goods_id, goods_name, goods_spec, goods_type,
-        case when order_type='out' then -1*packages else packages end as packages,
-        case when order_type='out' then -1*numbers else numbers end as numbers
+        case when order_type='in' then -1*packages else packages end as packages,
+        case when order_type='in' then -1*numbers else numbers end as numbers
         from lease_relet_orders
         join lease_relet_order_items on lease_relet_order_items.order_id = lease_relet_orders.id
         <where>
