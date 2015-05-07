@@ -152,7 +152,7 @@
 
                     $.extend(newOrder, {
                         leaserId: $('#leaser').textbox('getValue'),
-                        leaserName: $('#leaser').textbox('getText'),
+                        leaserName: $('#leaser').textbox('getText')
                     });
                 }
             },
