@@ -265,8 +265,17 @@
             success: function(data){
                 if(data.status == 200){
                     $.messager.alert('提示','单据保存成功！', 'info', function(){
-                        dialog.getData('callback')();
-                        dialog.close();
+                        $.messager.confirm('确认', '保存成功，是否打印?', function(r){
+                            dialog.getData('callback')();
+                            if(r){
+                                $.extend(newOrder, {code: result.data.code, type: 'in'});
+                                printOrder(newOrder, function(){
+                                    dialog.close();
+                                });
+                            }else{
+                                dialog.close();
+                            }
+                        });
                     });
                 }else{
                     $.messager.alert('错误','单据保存失败！' + '<br>' + data.message, 'error');
@@ -275,6 +284,19 @@
             },
             error: function(){
                 $.messager.alert('提示','单据保存失败！');
+            }
+        });
+    }
+
+    function printOrder(order, callback){
+        $.ajax({
+            url: 'static/template/leasing.ejs',
+            success: function(data){
+                var render = template.compile(data);
+                var html = render(order);
+                preview=window.open('','');
+                preview.document.write(html);
+                callback();
             }
         });
     }

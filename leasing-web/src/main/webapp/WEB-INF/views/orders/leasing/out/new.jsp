@@ -265,14 +265,21 @@
             type: 'post',
             url: 'leasing/orders/leaseorder/out/new',
             data: {leaseorder: $.toJSON(newOrder)},
-            success: function(data){
-                if(data.status == 200){
-                    $.messager.alert('提示','单据保存成功！', 'info', function(){
+            success: function(result){
+                if(result.status == 200){
+                    $.messager.confirm('确认', '保存成功，是否打印?', function(r){
                         dialog.getData('callback')();
-                        dialog.close();
+                        if(r){
+                            $.extend(newOrder, {code: result.data.code, type: 'out'});
+                            printOrder(newOrder, function(){
+                                dialog.close();
+                            });
+                        }else{
+                            dialog.close();
+                        }
                     });
                 }else{
-                    $.messager.alert('错误','单据保存失败！' + '<br>' + data.message, 'error');
+                    $.messager.alert('错误','单据保存失败！' + '<br>' + result.message, 'error');
                 }
 
             },
@@ -282,5 +289,17 @@
         });
     }
 
+    function printOrder(order, callback){
+        $.ajax({
+            url: 'static/template/leasing.ejs',
+            success: function(data){
+                var render = template.compile(data);
+                var html = render(order);
+                preview=window.open('','');
+                preview.document.write(html);
+                callback();
+            }
+        });
+    }
 </script>
 
